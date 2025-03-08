@@ -17,7 +17,7 @@ def RotateRight(head, k):
     if(head is None):
             return head
     if(k == 0):
-        return head    
+        return head
     rightPtr = head
     leftPtr = head
     startPtr = head
@@ -32,16 +32,16 @@ def RotateRight(head, k):
 
     if(count<k):
         k = k % count
-        
+
     if(k == count or count == 1 or k == 0):
-        return head 
+        return head
     i= 0
 
     while(i<k):
         rightPtr = rightPtr.next
         i+=1
-        
-    
+
+
     while(rightPtr.next != None):
         rightPtr = rightPtr.next
         leftPtr = leftPtr.next
@@ -84,17 +84,17 @@ def deleteNode(head, pos):
 def isSorted(head):
     if not head or not head.next:
         return 1  # A single-node or empty list is considered sorted
-    
+
     increasing = decreasing = True
     temp = head
-    
+
     while temp.next:
         if temp.data < temp.next.data:
             decreasing = False
         elif temp.data > temp.next.data:
             increasing = False
         temp = temp.next
-    
+
     return 1 if increasing or decreasing else 0
 
 def getKthFromLast(head, k):
@@ -111,7 +111,7 @@ def getKthFromLast(head, k):
     while(steps > 0):
         temp = temp.next
         steps -= 1
-    
+
     return temp.data
 
 # two pointers approach
@@ -124,7 +124,7 @@ def getKthFromLast(head, k):
             return -1
         first = first.next
         k-=1
-    
+
     while(first.next != None):
         first = first.next
         second = second.next
@@ -147,10 +147,10 @@ def areIdentical(head1, head2):
             return False
         head1 = head1.next
         head2 = head2.next
-    
+
     if(head1 != None or head2 != None):
         return False
-    
+
     return True
 
 
@@ -159,15 +159,15 @@ def insertInMiddle( head, x):
     if head is None:
         head = LinkedListNode(x)
         return head
-        
+
     temp = head
     middle = getMiddleElement(temp)
     var = middle.next
     middle.next = LinkedListNode(x)
     middle.next.next = var
     return head
-        
-    
+
+
 def     getMiddleElement(head):
     slow = head
     fast = head
@@ -183,9 +183,9 @@ def insertAtPosition(head, pos, data):
         if(temp.next == None):
             return head
         temp = temp.next
-    
 
-    
+
+
     nextNode = temp.next
     temp.next = LinkedListNode(data)
     temp.next.next = nextNode
@@ -199,7 +199,7 @@ def insertInSorted(head,data):
         head = newNode
         head.next = temp
         return head
-    
+
     while(temp.next !=None):
         if(temp.next.data > data):
             break
@@ -209,7 +209,7 @@ def insertInSorted(head,data):
     temp.next.next = nextNode
 
     return head
-    
+
 def deleteTail(head):
     #code here
     temp = head
@@ -219,20 +219,20 @@ def deleteTail(head):
     return head
 
 def reverseList(head):
-    if not head: 
+    if not head:
         return None
-    
+
     prev = None
     curr = head
-    forward = curr.next 
-    
+    forward = curr.next
+
     while forward:
         curr.next = prev
         prev = curr
         curr = forward
-        forward = forward.next 
-    
-    curr.next = prev 
+        forward = forward.next
+
+    curr.next = prev
     return curr
 
 def palindromeLinkedList(head):
@@ -247,6 +247,8 @@ def palindromeLinkedList(head):
         temp = temp.next
         reverseHead = reverseHead.next
     return True
+
+# 92. Reverse Linked List II
 
 def reverseBetween(self, head, left, right):
     return head

@@ -208,9 +208,91 @@ def rightSideView(root):
         rightViewNodes.append(data[-1])
     return rightViewNodes
 
+def leftSideView(root):
+    if not root:
+        return []
+    
+    leftNodes = []
+    queue = [root]
+    while len(queue) > 0:
+        data = []
+        levelSize = len(queue)
+        for _ in range(0, levelSize):
+            node = queue.pop(0)
+            if (node.left is not None) : queue.append(node.left)
+            if (node.right is not None) : queue.append(node.right)
+            data.append(node.data)
+        leftNodes.append(data[0])
+    return leftNodes
+
+def zigzagLevelOrder(root):
+    if not root:
+        return []
+    direction = 0
+    queue = [root]
+    level = []
+    while len(queue) > 0:
+        data = []
+        levelSize = len(queue)
+        direction += 1
+
+        for _ in range(0, levelSize):
+            node = queue.pop(0)
+            if (node.left is not None) : queue.append(node.left)
+            if (node.right is not None) : queue.append(node.right)
+            data.append(node.data)
+        
+        if direction % 2 != 0:
+            level.append(data)
+        else:
+            level.append(data[::-1])
+    return level
+
+
+
+def zigZagTraversalGFG(root):
+    if not root:
+        return []
+    direction = 0
+    queue = [root]
+    level = []
+    
+    while(len(queue)>0):
+        data = []
+        levelSize = len(queue)
+        direction += 1
+        
+        for _ in range(0, levelSize):
+            node = queue.pop(0)
+            if(node.left is not None) : queue.append(node.left)
+            if(node.right is not None) : queue.append(node.right)
+            data.append(node.data)
+        if(direction % 2 != 0):
+            level.extend(data)
+        else:
+            level.extend(data[::-1])
+    return level
+
+def levelOrderTraversal(root):
+    if not root:
+        return []
+    
+    queue = [root]
+    level = []
+    while len(queue) > 0:
+        data = []
+        levelSize = len(queue)
+        for _ in range(0, levelSize):
+            node = queue.pop(0)
+            if (node.left is not None) : queue.append(node.left)
+            if (node.right is not None) : queue.append(node.right)
+            data.append(node.data)
+        level.append(data)
+    return level[::-1]
+
 def check():
     tree = BinaryTree(1)  # ✅ This now correctly initializes the class
-    root1 = tree.build_tree([1,2,3,"N",5,"N",4])
+    root1 = tree.build_tree([3,9,20,"N","N",15,7])
     # tree.printTree(levelOrderTraversal(root1))
-    print(rightSideView(root1))
+    print(levelOrderTraversal(root1))
 check()
