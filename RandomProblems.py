@@ -263,3 +263,5 @@ L = [3,2,4]
 
 # mydict = {"a":1, "b":1}
 # print("a" in mydict)
+a= [1,2,3,4,5]
+print(a[-1])

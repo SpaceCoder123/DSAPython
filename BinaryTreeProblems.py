@@ -1,6 +1,5 @@
 from OOPS.BinaryTree.BinaryTree import BinaryTree  # ✅ Import the class, not the module
 
-
 def levelOrder(root):
     # Your code here
     queue = [root]
@@ -175,10 +174,43 @@ def ValidateBinaryTreeCalculate(root, leftLimit, rightLimit):
     right = ValidateBinaryTreeCalculate(root.right, root.data,rightLimit)
     return left and right
 
+def levelOrderTraversal(root):
+    if not root:
+        return []
+    
+    queue = [root]
+    level = []
+    while len(queue) > 0:
+        data = []
+        levelSize = len(queue)
+        for _ in range(0, levelSize):
+            node = queue.pop(0)
+            if (node.left is not None) : queue.append(node.left)
+            if (node.right is not None) : queue.append(node.right)
+            data.append(node.data)
+        level.append(data)
+    return level
+
+def rightSideView(root):
+    if not root:
+        return []
+    
+    rightViewNodes = []
+    queue = [root]
+    while len(queue) > 0:
+        data = []
+        levelSize = len(queue)
+        for _ in range(0, levelSize):
+            node = queue.pop(0)
+            if (node.left is not None) : queue.append(node.left)
+            if (node.right is not None) : queue.append(node.right)
+            data.append(node.data)
+        rightViewNodes.append(data[-1])
+    return rightViewNodes
 
 def check():
     tree = BinaryTree(1)  # ✅ This now correctly initializes the class
-    root1 = tree.build_tree([2,1,3])
-    # tree.printTree(levelOrder(root1))
-    print(validateBinaryTree(root1))
+    root1 = tree.build_tree([1,2,3,"N",5,"N",4])
+    # tree.printTree(levelOrderTraversal(root1))
+    print(rightSideView(root1))
 check()
