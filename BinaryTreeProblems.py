@@ -290,9 +290,38 @@ def levelOrderTraversal(root):
         level.append(data)
     return level[::-1]
 
+
+# def diameterOfBinaryTree(root):
+#     if not root:
+#         return []
+    
+#     diameter = 0
+#     queue = [root]
+#     level = []
+#     while len(queue) > 0:
+#         data = []
+#         levelSize = len(queue)
+#         for _ in range(0, levelSize):
+#             node = queue.pop(0)
+#             if (node.left is not None) : queue.append(node.left) else: queue
+#             if (node.right is not None) : queue.append(node.right)
+#             data.append(node.data)
+
+#         if(len(level) == 0):
+#             diameter+=1
+#             continue
+#         if(len(level[-1]) < len(data)):
+#             diameter+=len(level)
+#         level.append(data)
+
+
+#     return diameter
+
+
+
 def check():
     tree = BinaryTree(1)  # ✅ This now correctly initializes the class
-    root1 = tree.build_tree([3,9,20,"N","N",15,7])
+    root1 = tree.build_tree([1, 2, 3, 4, 5, "N", 6, "N", "N", 7, "N", "N", 8])
     # tree.printTree(levelOrderTraversal(root1))
-    print(levelOrderTraversal(root1))
+    # print(diameterOfBinaryTree(root1))
 check()

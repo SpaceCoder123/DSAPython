@@ -53,10 +53,12 @@ L = [11,12,22,25,64]
 
 def mergeTwoArrays(arr1, arr2):
     resultArray = []
+
+    if(len(arr2) == 0 and len(arr1) == 0):
+        return resultArray
+    
     while(True):
-        if(len(arr2) == 0 and len(arr1) == 0):
-            break
-        elif(len(arr2) == 0):
+        if(len(arr2) == 0):
             resultArray += arr1 
             break
         elif(len(arr1) == 0):
@@ -173,7 +175,33 @@ def merge2(nums1, m, nums2, n):
 
     return nums1
 
-print(merge2([1,2,3,0,0,0],3,[2,5,6],3))
+def merge(left, right):
+    merged = []
+    i = j = 0
 
+    while i < len(left) and j < len(right):
+        if left[i] < right[j]:
+            merged.append(left[i])
+            i += 1
+            inversion+=1
+        else:
+            merged.append(right[j])
+            j += 1
+
+    merged.extend(left[i:])
+    merged.extend(right[j:])
+    return (merged)
+
+def merge_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    
+    mid = len(arr) // 2
+    left_half = merge_sort(arr[:mid]) 
+    right_half = merge_sort(arr[mid:])
+    return merge(left_half, right_half)
+
+
+print(merge_sort([2,1,4,3,7,8,5]))
 # timeComplexity = O(n+m) 
 # spaceComplexity = O(1)

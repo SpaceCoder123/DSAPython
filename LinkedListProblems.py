@@ -250,8 +250,6 @@ def palindromeLinkedList(head):
 
 # 92. Reverse Linked List II
 
-def reverseBetween(self, head, left, right):
-    return head
 
 
 def modifiedList(nums, head):
@@ -284,10 +282,44 @@ def removeNodes(head):
     return reverseList(reversedHead)
 
 
+#still in progress
+def reverseBetween(head, left, right):
+    if not head or left == right:
+        return head
+
+    startNode = LinkedListNode(-1)
+    startNode.next = head
+    prev = startNode
+    curr = head
+
+    for i in range(left - 1):
+        prev = curr
+        curr = curr.next
+
+    start = curr
+
+    for j in range(abs(right - left) + 1): 
+        nextNode = curr.next
+        curr.next = prev
+        prev = curr
+        curr = nextNode
+    
+    start.next = curr
+    if left > 1:
+        prev_left = startNode
+        for _ in range(left - 1):
+            prev_left = prev_left.next
+        prev_left.next = prev 
+    else:
+        startNode.next = prev 
 
 
-head = createLinkedList([5,2,13,3,8])
+    return startNode.next
+
+
+
+head = createLinkedList([1,2,3,4,5])
 list= [6]
 # head2 = createLinkedList([1,2,2,3,4,5])
-head2 = removeNodes(head)
+head2 = reverseBetween(head,2,4)
 printLinkedList(head2)
