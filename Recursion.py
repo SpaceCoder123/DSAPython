@@ -93,4 +93,17 @@ def ropeCuttingProblem(n, a, b, c):
     
     return res + 1
 
-print(ropeCuttingProblem(23,5,13,5))
+# print(ropeCuttingProblem(10,9,7,11))
+
+# def checkString(string, first, last):
+#     if first >= last:
+#         return True
+#     if string[first] != string[last]:
+#         return False
+#     return checkString(string, first+1, last-1)
+
+# def recursivePalindromeCheck(string):
+#     return checkString(string, 0, len(string)-1)
+
+# print(recursivePalindromeCheck("ab"))
+

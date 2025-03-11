@@ -39,9 +39,9 @@ class BinaryTree:
     def printTree(self, root):
         if root is None:
             return
-        print(root.data)  # Fix: Use `data` instead of `value`
         self.printTree(root.left)
         self.printTree(root.right)
+        print(root.data)  # Fix: Use `data` instead of `value`
 
     def checkBalancedTree(self, root):
         def height(node):

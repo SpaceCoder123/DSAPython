@@ -1,4 +1,5 @@
-from OOPS.BinaryTree.BinaryTree import BinaryTree  # ✅ Import the class, not the module
+from OOPS.BinaryTree.BinaryTree import BinaryTree # ✅ Import the class, not the module
+from OOPS.BinaryTree.TreeNode import TreeNode
 
 def levelOrder(root):
     # Your code here
@@ -317,11 +318,40 @@ def levelOrderTraversal(root):
 
 #     return diameter
 
+# 109. Convert Sorted List to Binary Search Tree
+
+def sortedListToBST(head):
+    list = getAllElements(head)
+    return getNode(list, 0, len(list)-1)
+
+    
+def getNode(arr, left, right):
+    mid = (left + right) // 2
+
+    if left > right:
+        return None
+    Node = TreeNode(arr[mid])
+    Node.left = getNode(arr, left, mid-1)
+    Node.right = getNode(arr, mid+1, right)
+    return Node
+
+def getAllElements(head):
+    list = []
+    while(head.next!=None):
+        list.append(head.data)
+        head = head.next
+    return list
 
 
 def check():
     tree = BinaryTree(1)  # ✅ This now correctly initializes the class
     root1 = tree.build_tree([1, 2, 3, 4, 5, "N", 6, "N", "N", 7, "N", "N", 8])
-    # tree.printTree(levelOrderTraversal(root1))
+    # print(levelOrderTraversal(sortedListToBST([-10,-3,0,5,9])))
     # print(diameterOfBinaryTree(root1))
+
+    # head = createLinkedList([1,2,3,4,5])
+    # list= [6]
+    # # head2 = createLinkedList([1,2,2,3,4,5])
+    # head2 = reverseBetween(head,2,4)
+    # printLinkedList(head2)
 check()

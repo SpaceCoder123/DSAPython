@@ -168,7 +168,7 @@ def insertInMiddle( head, x):
     return head
 
 
-def     getMiddleElement(head):
+def getMiddleElement(head):
     slow = head
     fast = head
     while(fast.next != None and fast.next.next!=None):
