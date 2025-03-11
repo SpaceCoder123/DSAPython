@@ -316,10 +316,51 @@ def reverseBetween(head, left, right):
 
     return startNode.next
 
+def pairSum(head):
+    if not head or not head.next:
+        return 0
+    temp = head
+
+    middle = getMiddleElement(temp)
+    nextElement = middle.next
+    middle.next = None
+    reversedList = reverseList(nextElement)
+    highestElement = 0
+    while(temp!=None):
+        pair = reversedList.data + temp.data
+        if(highestElement < pair):
+            highestElement = pair
+        reversedList = reversedList.next
+        temp = temp.next            
+    return highestElement
 
 
-head = createLinkedList([1,2,3,4,5])
-list= [6]
-# head2 = createLinkedList([1,2,2,3,4,5])
-head2 = reverseBetween(head,2,4)
-printLinkedList(head2)
+def pairSumStack(head):
+    if not head or not head.next:
+        return 0
+    temp = head
+
+    stack = []
+
+    middle = getMiddleElement(temp)
+    nextElement = middle.next
+    middle.next = None
+
+    while nextElement is not None:
+        stack.append(nextElement.data)
+        nextElement = nextElement.next         
+
+    maxElement = float("-inf")
+    print(stack)
+
+    while(len(stack) > 0):
+        data =  stack.pop() + temp.data 
+        if(data > maxElement):
+            maxElement = data
+        temp = temp.next
+
+    return maxElement
+
+
+head = createLinkedList([5,4,2,1])
+print(pairSumStack(head))

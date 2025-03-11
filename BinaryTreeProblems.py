@@ -342,10 +342,19 @@ def getAllElements(head):
         head = head.next
     return list
 
+# 104. Maximum Depth of Binary Tree
+def maxDepth(root):
+    if(root == None):
+        return -1
+    leftHeight = maxDepth(root.left) 
+    rightHeight = maxDepth(root.right)
+    return max(leftHeight, rightHeight) +1
+
 
 def check():
     tree = BinaryTree(1)  # ✅ This now correctly initializes the class
-    root1 = tree.build_tree([1, 2, 3, 4, 5, "N", 6, "N", "N", 7, "N", "N", 8])
+    root1 = tree.build_tree([3,9,20,"N","N",15,7])
+    print(hieghtOfATree(root1))
     # print(levelOrderTraversal(sortedListToBST([-10,-3,0,5,9])))
     # print(diameterOfBinaryTree(root1))
 
