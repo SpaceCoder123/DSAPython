@@ -1,4 +1,5 @@
-from OOPS.LinkedList.LinkedListNode import LinkedListNode  # Ensure correct import
+from OOPS.LinkedList.LinkedListNode import LinkedListNode 
+
 def printLinkedList(head):
     temp = head
     while(temp!= None):
@@ -377,7 +378,48 @@ def swapPairs(head):
             break
     return head
 
+# 1367. Linked List in Binary Tree
+def isSubPath(head, root):
+    if head is None or root is None:
+        return False
+    
+    if(head.data == root.data):
+        return True
+    
+    left = isSubPath(head.next, root.left)
+    right = isSubPath(head.next, root.right)
+    return left or right
 
+# 1367. Merge between linked lists
+def mergeInBetween(list1, a, b, list2):
+    temp = list2
+    start = list2
+    while temp.next:
+        temp = temp.next
+    
+    difference = abs(a-b)
 
-head = createLinkedList([1,2,3])
-printLinkedList(swapPairs(head))
+    curr = list1.next
+    prev = list1
+
+    for _ in range(1,a):
+        curr = curr.next
+        prev = prev.next
+    
+    for _ in range(0, difference):
+        curr = curr.next
+
+    tail = curr.next
+
+    prev.next = start
+    temp.next = tail
+
+    return list1
+
+head1 = createLinkedList([1,2,3,4,5])
+head2 = createLinkedList([100,101])
+printLinkedList(mergeInBetween( head1, 2, 2, head2))
+
+# tree = BinaryTree(1)
+# root1 = tree.build_tree([1,4,4,"N",2,2,"N",1,"N",6,8,"N","N","N","N",1,3])
+# print(isSubPath(head, tree))
