@@ -264,4 +264,25 @@ L = [3,2,4]
 # mydict = {"a":1, "b":1}
 # print("a" in mydict)
 a= [1,2,3,4,5]
-print(-6/132)
+# print(-6/132)
+
+# def sortColors(nums):
+#     collection = {}
+#     for i in nums:
+#         if i in collection:
+#             collection[i] += 1
+#         else:
+#             collection[i] = 1
+#     return [0] * collection[0] + [1] * collection[1] + [2] * collection[2]
+
+
+def sortColors(nums):
+    collection = {}
+    for i in nums:
+        if i in collection:
+            collection[i] += 1
+        else:
+            collection[i] = 1
+    return [0] * collection[0] + [1] * collection[1] + [2] * collection[2]
+
+print(sortColors([2,0,2,1,1,0]))

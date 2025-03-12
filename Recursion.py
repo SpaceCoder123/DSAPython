@@ -107,3 +107,10 @@ def ropeCuttingProblem(n, a, b, c):
 
 # print(recursivePalindromeCheck("ab"))
 
+def power_set(s):
+    result = []
+
+    
+    return result
+
+print(power_set("abc"))

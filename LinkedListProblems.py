@@ -361,6 +361,23 @@ def pairSumStack(head):
 
     return maxElement
 
+# 24. Swap Nodes in Pairs
+def swapPairs(head):
+    if head is None:
+        return head
+    
+    prev = head
+    curr = prev.next
+    while curr:
+        prev.data, curr.data = curr.data, prev.data
+        if curr.next is not None:
+            prev = prev.next.next
+            curr = curr.next.next
+        else:
+            break
+    return head
 
-head = createLinkedList([5,4,2,1])
-print(pairSumStack(head))
+
+
+head = createLinkedList([1,2,3])
+printLinkedList(swapPairs(head))
