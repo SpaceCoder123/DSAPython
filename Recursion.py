@@ -109,8 +109,39 @@ def ropeCuttingProblem(n, a, b, c):
 
 def power_set(s):
     result = []
-
-    
+    powerSet = 2**len(s)
+    for i in range(powerSet):
+        str = ""
+        binary = bin(i)[2:].zfill(len(s))
+        for j in range(len(binary)):
+            if binary[j] == "1":
+                str += s[j]
+        result.append(str)
     return result
 
-print(power_set("abc"))
+def sumOfDigits(number):
+    if  number == 0:
+        return 0
+    else:
+        return (number % 10) + sumOfDigits(number//10)
+
+def countZero(number):
+    if number == 0:
+        return 0
+    if number % 10 == 0:
+        return 1 + countZero(number // 10)
+    else:
+        return countZero(number // 10)
+
+def countOccurances(list, target):
+    if(len(list) == 0):
+        return 0
+    
+    if(list[0] == target):
+        return 1+ countOccurances(list[1:], target)
+    else:
+        return countOccurances(list[1:], target)
+
+
+print(countOccurances([1,1,2,3,2,2,4],1))
+# print(1//10)

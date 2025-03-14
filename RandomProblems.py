@@ -285,4 +285,45 @@ def sortColors(nums):
             collection[i] = 1
     return [0] * collection[0] + [1] * collection[1] + [2] * collection[2]
 
-print(sortColors([2,0,2,1,1,0]))
+# print(sortColors([2,0,2,1,1,0]))
+
+# 1752. Check if Array Is Sorted and Rotated
+def checkIfSortedAndRotated(nums):
+    n = len(nums)
+    if(n <= 1):
+        return True
+    
+    last = n-1
+    first = 1
+    prev = 0
+    count = 0
+
+
+    if(nums[prev] < nums[last]):
+        count+=1
+
+    while(first < n):
+        if(nums[prev] > nums[first]):
+            count+=1
+        print(nums[prev], nums[last])
+        first+=1
+        prev +=1
+    return count <= 1
+
+# print(checkIfSortedAndRotated([5,1,5,1]))
+
+# just take the minimum and maximum simoultaneously and find the difference
+def maxAbsDiff(arr, n):
+
+	minEle = arr[0]
+	maxEle = arr[0]
+	for i in range(1, n):
+		minEle = min(minEle, arr[i])
+		maxEle = max(maxEle, arr[i])
+
+	return (maxEle - minEle)
+
+# Driver code
+arr = [0, 1, 5, 3]
+n = len(arr)
+print(maxAbsDiff(arr, n))
