@@ -143,5 +143,20 @@ def countOccurances(list, target):
         return countOccurances(list[1:], target)
 
 
-print(countOccurances([1,1,2,3,2,2,4],1))
+# print(countOccurances([1,1,2,3,2,2,4],1))
 # print(1//10)
+
+# def myPow(base, exponent):
+#     value = helper(base, abs(exponent))
+#     return 1 / value if exponent < 0 else value
+
+# def helper(base, exponent):
+#     if exponent == 0:
+#         return 1
+#     if exponent == 1:
+#         return base
+    
+#     half = helper(base, exponent // 2)
+#     return half * half if exponent % 2 == 0 else half * half * base
+
+# print(myPow(2,100))

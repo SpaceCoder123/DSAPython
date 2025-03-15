@@ -428,5 +428,5 @@ def mergeInBetween(list1, a, b, list2):
 
 head1 = createLinkedList([1,4,2,6,8])
 tree = BinaryTree(1)
-root1 = tree.build_tree([1,4,4,"N",2,2,"N",1,"N",6,8,"N","N","N","N",1,3])
+root1 = tree.build_tree([1])
 print(isSubPath(head1, root1))

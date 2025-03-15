@@ -29,3 +29,18 @@ def rotateArray(arr, d):
 
 # O(n) time complexity
 # O(1) space complexity
+
+
+# 442. Find All Duplicates in an Array
+def findDuplicates(nums):
+    items = []
+    value = 0
+    for i in range(len(nums)):
+        value = abs(nums[i])
+        if(nums[value-1] < 0):
+            items.append(value)
+        nums[value - 1] = -nums[value - 1]
+    return items
+
+# O(n) time complexity
+# O(n/2) in worst
