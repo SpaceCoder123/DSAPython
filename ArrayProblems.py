@@ -42,5 +42,29 @@ def findDuplicates(nums):
         nums[value - 1] = -nums[value - 1]
     return items
 
+# 448. Find All Numbers Disappeared in an Array
+def findDisappearedNumbers(nums):
+    items = []
+    value = 0
+    for i in range(len(nums)):
+        value = abs(nums[i])
+        if(nums[value-1] < 0):
+            continue
+        nums[value - 1] = -nums[value - 1]
+
+    for i in range(len(nums)):
+        if(nums[i] > 0):
+            items.append(i+1)
+    return items
+
+# 268. Missing Number
+
+def missingNumber(nums):
+    n = len(nums)
+    total = n * (n + 1) // 2
+    arraySum = sum(nums)
+    return total - arraySum
+        
 # O(n) time complexity
-# O(n/2) in worst
+# O(1) in worst space
+print(missingNumber([1,1]))
