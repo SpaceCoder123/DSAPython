@@ -80,7 +80,7 @@ def sumExists(arr, N, sum):
     while(leftPtr < N):
         curr = arr[leftPtr]
         difference = abs(curr - sum)
-        print(difference, curr)
+        # print(difference, curr)
         if(curr > sum):
             leftPtr+=1
             continue
@@ -223,7 +223,7 @@ def preorder(root):
 def two_sum(nums, target):
     nums_with_index = [(num, i) for i, num in enumerate(nums)]
     nums_with_index.sort() 
-    print(nums_with_index)
+    # print(nums_with_index)
 
     left, right = 0, len(nums) - 1
 
@@ -305,7 +305,7 @@ def checkIfSortedAndRotated(nums):
     while(first < n):
         if(nums[prev] > nums[first]):
             count+=1
-        print(nums[prev], nums[last])
+        # print(nums[prev], nums[last])
         first+=1
         prev +=1
     return count <= 1
@@ -324,6 +324,22 @@ def maxAbsDiff(arr, n):
 	return (maxEle - minEle)
 
 # Driver code
-arr = [0, 1, 5, 3]
-n = len(arr)
-print(maxAbsDiff(arr, n))
+# arr = [0, 1, 5, 3]
+# n = len(arr)
+# print(maxAbsDiff(arr, n))
+
+# Two Sum II - Input Array Is Sorted // is this really medium level question LOL
+
+def twoSumSorted(numbers, target):
+    leftPointer = 0
+    rightPointner = len(numbers)-1
+    while(leftPointer < rightPointner):
+        total = numbers[leftPointer] + numbers[rightPointner]
+        if total > target:
+            rightPointner-=1
+        elif total == target:
+            return [leftPointer+1, rightPointner+1]
+        else:
+            leftPointer+=1
+
+print(twoSumSorted([-1,0],-1))
