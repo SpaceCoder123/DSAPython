@@ -64,7 +64,81 @@ def missingNumber(nums):
     total = n * (n + 1) // 2
     arraySum = sum(nums)
     return total - arraySum
-        
-# O(n) time complexity
-# O(1) in worst space
-print(missingNumber([1,1]))
+
+def maximumSubarraySum(arr, k):
+    n = len(arr)
+    if k > n:
+        return []
+    
+    total = 0
+    for i in range(k):
+        total+= arr[i]
+
+    curr = total
+    left = 0
+    right = k
+
+    while right < n:
+        curr = curr - arr[left]
+        curr += arr[right] 
+        right+=1
+        left+=1
+        if(curr>total):
+            total = curr
+    return total
+
+def longestEvenSubArray(arr):
+    return arr
+
+def majorityElement(arr):
+    n = len(arr)
+    if n == 0: 
+        return 0
+    if n == 1:
+        return arr[0]
+    
+    curr = arr[0]
+    count = 0
+    for i in range(1,n):
+        if arr[i] == curr:
+            count+=1
+        if arr[i] != curr:
+            if count == 0:
+                curr = arr[i]
+            else:
+                count-=1
+
+    majorityCount = 0
+    for i in range(n):
+        if(arr[i] == curr):
+            majorityCount+=1
+    
+    
+    return curr if majorityCount > n // 2 else -1
+
+def maxProfit(prices):
+    if not prices or len(prices) < 2:
+        return 0
+    
+    min_price = prices[0]
+    max_profit = 0 
+    
+    for price in prices[1:]:
+        min_price = min(min_price, price)
+        profit = price - min_price
+        max_profit = max(max_profit, profit)
+    return max_profit
+
+def maxProfitMed(prices):
+    n = len(prices)
+    if n <= 1:
+        return 0
+    maxProfit = 0
+    for i in range(1, n):
+        profit = prices[i] - prices[i-1]
+        if profit > 0:
+            maxProfit+=profit
+    return maxProfit
+
+
+print(maxProfitMed([2, 1, 4, 5, 2, 9, 7]))

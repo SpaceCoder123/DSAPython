@@ -350,11 +350,17 @@ def maxDepth(root):
     rightHeight = maxDepth(root.right)
     return max(leftHeight, rightHeight) +1
 
+def flattenBinaryTree(root):
+    return
+
+    
+
 
 def check():
-    tree = BinaryTree(1)  # ✅ This now correctly initializes the class
-    root1 = tree.build_tree([3,9,20,"N","N",15,7])
-    print(hieghtOfATree(root1))
+    tree = BinaryTree(1)
+    root1 = tree.build_tree([1,2,5,3,4,"N",6])
+    print(flattenBinaryTree(root1))
+    tree.printTree(root1)
     # print(levelOrderTraversal(sortedListToBST([-10,-3,0,5,9])))
     # print(diameterOfBinaryTree(root1))
 
