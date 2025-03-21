@@ -353,14 +353,50 @@ def maxDepth(root):
 def flattenBinaryTree(root):
     return
 
-    
 
+def rightSideView(root):
+    if not root:
+        return []
+    
+    rightViewNodes = []
+    queue = [root]
+    while len(queue) > 0:
+        data = []
+        levelSize = len(queue)
+        for i in range(0, levelSize):
+            node = queue.pop(0) # O(n)
+            if(i == levelSize - 1): data.append(node.data)
+            if (node.left is not None) : queue.append(node.left)
+            if (node.right is not None) : queue.append(node.right)
+    return rightViewNodes
+
+from collections import deque
+
+def right_view(root):
+    if not root: 
+        return []
+    
+    rightViewNodes = []
+    queue = deque([root])
+    
+    while queue:
+        queueLen = len(queue)
+        for i in range(queueLen):
+            node = queue.popleft() # O(1)
+            if i == queueLen - 1: 
+                rightViewNodes.append(node.data)
+            if node.left:
+                queue.append(node.left)
+            if node.right:
+                queue.append(node.right)
+            print(node.data)
+    return rightViewNodes
 
 def check():
     tree = BinaryTree(1)
-    root1 = tree.build_tree([1,2,5,3,4,"N",6])
-    print(flattenBinaryTree(root1))
-    tree.printTree(root1)
+    root1 = tree.build_tree([1,3,2])
+    print(right_view(root1))
+    # tree.printTree(root1)
     # print(levelOrderTraversal(sortedListToBST([-10,-3,0,5,9])))
     # print(diameterOfBinaryTree(root1))
 

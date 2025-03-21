@@ -141,4 +141,76 @@ def maxProfitMed(prices):
     return maxProfit
 
 
-print(maxProfitMed([2, 1, 4, 5, 2, 9, 7]))
+# print(maxProfitMed([2, 1, 4, 5, 2, 9, 7]))
+
+
+# 42. Trapping Rain Water , LeetCode Hard
+
+def trap(height):
+    
+    n = len(height)
+    highTowers = [0] * n
+    high = height[0]
+    for i in range(n):
+        if height[i] > high:
+            highTowers[i] = height[i]
+            high = height[i]
+        else:
+            highTowers[i] = high
+
+    lowTowers = [0] * n
+    low = height[n-1]
+    for i in range(n):
+        if height[n-i-1] > low:
+            lowTowers[n-i-1] = height[n-i-1]
+            low = height[n-i-1]
+        else:
+            lowTowers[n-i-1] = low
+
+    total = 0
+    for i in range(n):
+        curr = min(highTowers[i], lowTowers[i]) - height[i]
+        if curr > 0:
+            total+=curr
+    return total
+
+def trapOptimal(height):
+    n = len(height)
+    left = 0
+    right = n - 1
+
+    leftMax = height[left]
+    rightMax = height[right]
+
+    waterCollected = 0
+    while(left<=right):
+        if(height[left] <= height[right]):
+            if(height[left] > leftMax):
+                leftMax = height[left]
+            else:
+                waterCollected += max(leftMax,height[left])- height[left] 
+            left+=1
+        else:
+            if(height[right] > rightMax):
+                rightMax = height[right]
+            else:
+                waterCollected += max(rightMax,height[right])- height[right] 
+            right-=1
+    return waterCollected
+
+
+# print(trapOptimal([0,1,0,2,1,0,1,3,2,1,2,1]))
+
+# def maxCards(cards, k): 
+#     n = len(cards)
+#     front_sum = sum(cards[:k])
+#     max_sum = front_sum  
+
+#     back_sum = 0
+#     for i in range(1, k + 1):
+#         back_sum += cards[-i]
+#         front_sum -= cards[k - i]
+#         max_sum = max(max_sum, front_sum + back_sum)
+#     return max_sum
+
+# print(maxCards([-1,2,3,4,5,-1], 4))

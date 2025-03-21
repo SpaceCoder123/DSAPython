@@ -160,3 +160,87 @@ def countOccurances(list, target):
 #     return half * half if exponent % 2 == 0 else half * half * base
 
 # print(myPow(2,100))
+
+# def getSubsets(arr):
+    
+# 53. Maximum Subarray
+def maxSubArraySum(arr):
+    n = len(arr)
+    if n == 0:
+        return 0
+    if n == 1:
+        return arr[0]
+    
+    maxSum = arr[0]
+    localSum = arr[0]
+    
+    for i in range(1,n):
+        n = len(arr)
+        if n == 0:
+            return 0
+        if n == 1:
+            return arr[0]
+        
+        
+        maxSum = arr[0]
+        localSum = arr[0]
+        
+        for i in range(1,n):
+            localSum = max(arr[i], arr[i] + localSum)
+            maxSum = max(localSum, maxSum)
+        return maxSum
+
+# def firstMissingPositive(nums):
+#     smallest = float("inf")
+#     for i in nums:
+#         if i < smallest and i >= 0:
+#             i = smallest
+
+# print(maxSubArraySum([-8, -3, -6, -2, -5, -4]))
+
+
+def RecursionSubset(nums, rest):
+    if len(rest) == 0:
+        return [nums]
+    
+    curr = rest[:1]
+    left = RecursionSubset(nums+curr, rest[1:])
+    right = RecursionSubset(nums, rest[1:])
+
+    left.extend(right)     
+    return left
+
+# print(RecursionSubset([],[1,2,2]))
+
+# def RecursionSubsetNonRepeating(nums, rest):
+#     if len(rest) == 0:
+#         return [nums]
+    
+#     curr = rest[:1]
+#     left = RecursionSubsetNonRepeating(nums+curr, rest[1:])
+#     right = RecursionSubsetNonRepeating(nums, rest[1:])
+
+#     unique_subsets = set(tuple(subset) for subset in (left + right))
+
+#     return [list(subset) for subset in unique_subsets]
+
+def bracketGenerator(string, counter, limit):
+
+    if(counter == limit):
+        return [string]
+    
+    left = bracketGenerator("()"+string, counter+1, limit)
+    middle = bracketGenerator("("+string+")", counter+1, limit)
+    right = bracketGenerator(string+"()", counter+1, limit)
+
+    left.extend(middle)
+    left.extend(right)
+
+    return list(set(left))
+
+print(bracketGenerator("",0,4)) 
+["((())())","(())()()","(()(()))","((()))()","()(()())","(()()())","()(())()","()()()()","((()()))","()()(())","(()())()","()((()))","(((())))"]
+["(((())))","((()()))","((())())","((()))()","(()(()))","(()()())","(()())()","(())()()","()((()))","()(()())","()(())()","()()(())","()()()()"]
+
+
+# (())(())
