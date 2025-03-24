@@ -238,9 +238,56 @@ def bracketGenerator(string, counter, limit):
 
     return list(set(left))
 
-print(bracketGenerator("",0,4)) 
-["((())())","(())()()","(()(()))","((()))()","()(()())","(()()())","()(())()","()()()()","((()()))","()()(())","(()())()","()((()))","(((())))"]
-["(((())))","((()()))","((())())","((()))()","(()(()))","(()()())","(()())()","(())()()","()((()))","()(()())","()(())()","()()(())","()()()()"]
+# print(bracketGenerator("",0,4)) 
+# ["((())())","(())()()","(()(()))","((()))()","()(()())","(()()())","()(())()","()()()()","((()()))","()()(())","(()())()","()((()))","(((())))"]
+# ["(((())))","((()()))","((())())","((()))()","(()(()))","(()()())","(()())()","(())()()","()((()))","()(()())","()(())()","()()(())","()()()()"]
 
 
 # (())(())
+
+
+def reverseNumber(number, reversed = 0):
+    if number <= 0:
+        return reversed
+    remainder = number % 10
+    reversed = (reversed * 10) + remainder
+    return reverseNumber(number // 10, reversed)
+
+def pow(base, exponent):
+    if exponent == 0:
+        return 1
+    if exponent % 2 == 0:
+        return pow(base * base, exponent//2) 
+    else:
+        return base * pow(base, exponent-1)
+# print(reverse_exponentiation(3))
+
+def reverse_exponentiation(n):
+    return pow(n,reverseNumber(n))
+
+def reverseNumber(number, reversed = 0):
+    if number == 0:
+        return reversed
+        
+    remainder = number % 10
+    reversed = ( reversed * 10 ) + remainder
+    return reverseNumber(number // 10, reversed)
+
+
+def pow(base, exponent):
+    if exponent == 0:
+        return 1
+    if exponent > 0:
+        if exponent % 2 == 0:
+            return pow(base * base, exponent//2)
+        else:
+            return base * pow(base, exponent - 1)
+    else:
+        if exponent % 2 == 0:
+            return pow(1/(base * base), -exponent//2)
+        else:
+            return 1/(base * pow(base, -exponent - 1))
+
+
+# bro the edge cases are annoying man
+print(pow(2,-2))

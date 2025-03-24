@@ -201,16 +201,31 @@ def trapOptimal(height):
 
 # print(trapOptimal([0,1,0,2,1,0,1,3,2,1,2,1]))
 
-# def maxCards(cards, k): 
+def maxCards(cards, k):
+    n = len(cards)
+    total = sum(cards[:k])
+    max_total = total
+
+    for i in range(k, k + n):
+        total += cards[i % n] - cards[(i - k) % n]
+        max_total = max(max_total, total)
+
+    return max_total
+    
+# def maxCards(cards, k):
 #     n = len(cards)
-#     front_sum = sum(cards[:k])
-#     max_sum = front_sum  
+#     total = 0
+#     first = 0
+#     last = n-1
 
-#     back_sum = 0
-#     for i in range(1, k + 1):
-#         back_sum += cards[-i]
-#         front_sum -= cards[k - i]
-#         max_sum = max(max_sum, front_sum + back_sum)
-#     return max_sum
+#     while k > 0:
+#         if(cards[first] > cards[last]):
+#             total+=cards[first]
+#             first+=1
+#         else:
+#             total+=cards[last]
+#             last-=1
+#         k-=1
+#     return total
 
-# print(maxCards([-1,2,3,4,5,-1], 4))
+print(maxCards([5, 8 ,5 ,8 ,10 ,5 ,2 ,4 ,3, 5], 2))
