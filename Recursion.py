@@ -331,6 +331,7 @@ def permute(string):
 
 print(permute([1,1,5]))
 
+# still in progress, duplicates test cases are remaining, will solve after finishing the removal of repeating characters
 
 def nextPermutation(string):
 
