@@ -380,31 +380,6 @@ def swapPairs(head):
             break
     return head
 
-# 1367. Linked List in Binary Tree
-def isSubPath(head, root):
-    if root is None or head is None:
-        return False
-
-    return checkLinkedList(head,head,root)
-
-def checkLinkedList(head, mainHead, root):
-    if head is not None and root is None:
-        return False
-    
-    if head is None:
-        return True
-    
-    left = False
-    right = False
-
-    if head.data != root.data:
-        left = checkLinkedList(mainHead, mainHead, root.left)
-        right = checkLinkedList(mainHead, mainHead, root.right)
-    else:
-        left = checkLinkedList(head.next, mainHead, root.left)
-        right = checkLinkedList(head.next, mainHead, root.right)
-    
-    return left or right
 
 # 1367. Merge between linked lists
 def mergeInBetween(list1, a, b, list2):
@@ -425,6 +400,32 @@ def mergeInBetween(list1, a, b, list2):
     prev.next = start
     temp.next = tail
     return list1
+
+
+
+# 1367. Linked List in Binary Tree
+def isSubPath(head, root):
+    if head is None:
+        return True
+    if root is None:
+        return False
+
+    return checkLinkedList(head,root) or isSubPath(head, root.left) or isSubPath(head, root.right)
+
+def checkLinkedList(head, root):
+    if head is None:
+        return True
+    if root is None:
+        return False
+
+
+    if head.data != root.data:
+        return False
+    
+    left = checkLinkedList(head.next, root.left)
+    right = checkLinkedList(head.next, root.right)
+    
+    return left or right
 
 head1 = createLinkedList([1,4,2,6,8])
 tree = BinaryTree(1)

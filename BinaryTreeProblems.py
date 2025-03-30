@@ -1,6 +1,5 @@
 from OOPS.BinaryTree.BinaryTree import BinaryTree # ✅ Import the class, not the module
 from OOPS.BinaryTree.TreeNode import TreeNode
-
 def levelOrder(root):
     # Your code here
     queue = [root]
@@ -400,7 +399,7 @@ def check():
     # print(levelOrderTraversal(sortedListToBST([-10,-3,0,5,9])))
     # print(diameterOfBinaryTree(root1))
 
-    # head = createLinkedList([1,2,3,4,5])
+    head = createLinkedList([1,2,3,4,5])
     # list= [6]
     # # head2 = createLinkedList([1,2,2,3,4,5])
     # head2 = reverseBetween(head,2,4)

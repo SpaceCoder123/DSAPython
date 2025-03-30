@@ -290,4 +290,65 @@ def pow(base, exponent):
 
 
 # bro the edge cases are annoying man
-print(pow(2,-2))
+# print(pow(2,-2))
+
+def bracketGenerator(number):
+    brackets = []
+    
+    def bracketHelper(string, left, right):
+        if len(string) == 2 * number:
+            brackets.append(string)
+            return
+        
+        if left < number:
+            bracketHelper(string + "(", left + 1, right)
+        
+        if right < left:
+            bracketHelper(string + ")", left, right + 1)
+
+    bracketHelper("", 0, 0)
+    return brackets
+
+# print(bracketGenerator(3))
+
+def permute(string):
+    string.sort()
+    permutationsResult = []
+
+    def permutations(index):
+        n = len(string)
+        if index == n:
+            permutationsResult.append(string[:])
+            return 
+        for i in range(index, n):
+            string[i] , string[index] = string[index] , string[i]
+            permutations(index+1)
+            string[i] , string[index] = string[index] , string[i]
+
+    permutations(0)
+    return permutationsResult
+
+
+print(permute([1,1,5]))
+
+
+def nextPermutation(string):
+
+    permutationsResult = []
+    def permutations(index):
+        n = len(string)
+        if index == n and flag:
+            if flag:
+                permutationsResult.extend(string)
+            else:
+                flag = True
+            return 
+        
+        for i in range(index, n):
+            string[i] , string[index] = string[index] , string[i]
+            permutations(index+1)
+            string[i] , string[index] = string[index] , string[i]
+
+    permutations(0)
+    return permutationsResult
+# print(permute([3,2,1]))

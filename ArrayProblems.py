@@ -222,6 +222,8 @@ def maxCards(cards, k):
 #         if(cards[first] > cards[last]):
 #             total+=cards[first]
 #             first+=1
+#         elif cards[first] == cards[last]:
+#             if(cards[first+1] >)
 #         else:
 #             total+=cards[last]
 #             last-=1
