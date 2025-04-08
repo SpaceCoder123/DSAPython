@@ -328,28 +328,21 @@ def permute(string):
     permutations(0)
     return permutationsResult
 
+def duplicatesPermutations(elements):
+    result = []
 
-print(permute([1,1,5]))
-
-# still in progress, duplicates test cases are remaining, will solve after finishing the removal of repeating characters
-
-def nextPermutation(string):
-
-    permutationsResult = []
     def permutations(index):
-        n = len(string)
-        if index == n and flag:
-            if flag:
-                permutationsResult.extend(string)
-            else:
-                flag = True
+        n = len(elements)
+        if index == n and elements not in result:
+            result.append(elements[:])
             return 
         
         for i in range(index, n):
-            string[i] , string[index] = string[index] , string[i]
+            elements[i] , elements[index] = elements[index] , elements[i]
             permutations(index+1)
-            string[i] , string[index] = string[index] , string[i]
+            elements[i] , elements[index] = elements[index] , elements[i]
 
     permutations(0)
-    return permutationsResult
-# print(permute([3,2,1]))
+    return result
+
+print(duplicatesPermutations([3,2,1]))

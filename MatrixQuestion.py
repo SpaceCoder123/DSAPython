@@ -8,7 +8,7 @@ def snakePattern(matrix):
                 print(matrix[i][j], end=" ")
     return matrix
 
-arr = [[1,2,3,4],[1,2,3,9],[4,5,6,10],[7,8,9,22]]
+
 # snakePattern(arr)
 
 def findElementin2DMatrix(matrix, element):
@@ -88,3 +88,20 @@ def findWordHelper(matrix, string, pointer, row, col, visited):
     visited.remove((row, col))
     return found
 
+
+def transposeOfAMatrix(matrix):
+    for i in range(len(matrix)):
+        for j in range(i, len(matrix)):
+            matrix[i][j],matrix[j][i] = matrix[j][i],matrix[i][j]
+    return matrix
+
+arr = [[1,2,3],[4,5,6],[7,8,9]]
+# print(transposeOfAMatrix(arr))
+
+def rotateMatrix(matrix):
+    for i in range(len(matrix)):
+        matrix[i].reverse()
+    
+    return matrix
+
+print(rotateMatrix(transposeOfAMatrix(arr)))
