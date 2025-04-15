@@ -342,4 +342,16 @@ def twoSumSorted(numbers, target):
         else:
             leftPointer+=1
 
-print(twoSumSorted([-1,0],-1))
+# print(twoSumSorted([-1,0],-1))
+
+import OOPS.Queue.QueueStructure as Queue
+
+def checkQueue():
+    q = Queue.MyQueue()
+    q.enqueue(2)
+    q.enqueue(3)
+    q.enqueue(4)
+    q.enqueue(5)
+    q.printQueue()
+
+checkQueue()

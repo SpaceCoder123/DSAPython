@@ -48,11 +48,11 @@ def checkEdge(source, destination):
     return False
 
 graph = {
-    'A': ['B','C','E'],
-    'B': ['C','A', 'D'],
-    'C': ['A', 'B','D'],
-    'D': ['C', 'B'],
-    'E': ['A']
+    '0': ['1','3','4'],
+    '1': ['C','0', '3'],
+    'C': ['0', '1','3'],
+    '3': ['C', '1'],
+    '4': ['0']
 }
 
 def dfs(graph, start):
@@ -71,4 +71,52 @@ def dfs(graph, start):
     finalHash = dfsHelper(start, [start])
     return finalHash
 
-print(dfs(graph,"A"))            
+def bfs(graph, start):
+    visited = []
+    myQueue = [start]
+    while(len(myQueue) > 0):
+        node = myQueue.pop(0)
+        
+        if node not in  visited:
+            visited.append(node)
+            
+        neighbours = graph[node]
+        for i in neighbours:
+            if i in visited:
+                continue
+            myQueue.append(i)
+    return visited
+# print(bfs(graph,"A"))            
+
+graphList = [[1, 2],[0, 3, 4],[0, 5],[1, 6],[1, 5],[2, 4, 7],[3, 7],[5, 6, 8],[7, 9],[8, 10, 11],[9],[9, 12],[11, 13],[12]]
+
+def getShortestPath(graph, start, target):
+    visited = [None] * len(graph) 
+    visited[start] = 0
+    queue = [start]
+    parent = [None] * len(graph)
+
+    while(len(queue) > 0):
+        node = queue.pop(0)
+        if node == target:
+            break
+        neighbours = graph[node]
+        for i in neighbours:
+            if visited[i] == None:
+                visited[i] = visited[node] + 1
+                parent[i] = node
+                queue.append(i) 
+    
+    if visited[target] is None:
+        return "path does not exist"
+
+    path = []
+    current = target
+    while current is not None:
+        path.append(current)
+        current = parent[current]
+
+    path.reverse()
+
+    return path
+print(getShortestPath(graphList, 0,6))
