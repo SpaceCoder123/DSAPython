@@ -119,4 +119,101 @@ def getShortestPath(graph, start, target):
     path.reverse()
 
     return path
-print(getShortestPath(graphList, 0,6))
+# print(getShortestPath(graphList, 0,6))
+
+
+# lets do using adjacency matrix
+matrix = [[0,1,1],[1,0,1],[1,1,0]]
+
+# 0 1 1
+# 1 0 1
+# 1 1 0
+def getAllNeighbours(matrix, node):
+    neighbours = []
+    row = matrix[node]
+    for j in range(len(row)):
+        if row[j] == 1:
+            neighbours.append(j)
+    return neighbours
+
+
+def dfs(matrix):
+    visited = [False] * len(matrix)
+    nodes = []
+    for k in range(len(visited)):
+        if visited[k] == False:
+            nodes.append(k)
+            visited[k] = True
+            neighnours = matrix[k]
+            for i in range(len(neighnours)):
+                if neighnours[i] == 1 and visited[i] == False: 
+                    visited[i] = True
+                    nodes.append(i)
+    return nodes
+
+def checkLoop(list, vertices):
+    queue = [(0,0)]
+    visited = [False] * vertices
+    while(len(queue) > 0):
+        queueItem = queue.pop(0)
+        currNode = queueItem[1]
+        parentNode = queueItem[0]
+        neighbours = list[currNode]
+        for neighbour in neighbours:
+            
+            visited[parentNode] = True
+            if neighbour == parentNode:
+                continue
+            
+            elif visited[neighbour] == True:
+                return True
+
+            else:
+                queue.append((currNode, neighbour)) 
+                   
+    return False
+
+cycleInput = [[1, 2], [0, 2], [0, 1]]
+
+def checkGraphConnected(matrix):
+    visited = [False] * len(matrix)
+
+    def dfs(node):
+        visited[node] = True
+        for neighbor in range(len(matrix)):
+            if matrix[node][neighbor] == 1 and not visited[neighbor]:
+                dfs(neighbor)
+
+    dfs(0)
+
+    return all(visited)
+
+def minStepToReachTarget(knightPos, targetPos, n):
+    visitedPoints = {}
+    def helper(row, col, count):
+        if row < 1 or col < 1 or row > n or col > n:
+            return False
+            
+        if (row, col) in visitedPoints:
+            if visitedPoints[(row,col)] >= count:
+                return False
+            else:
+                visitedPoints[(row,col)] = count
+        else:
+            visitedPoints[(row,col)] = count
+        
+        if row == targetPos[0] and col == targetPos[1]:
+            return True
+            
+        return (helper(row -2, col-1, count+1) 
+                or helper(row -2, col+1, count+1)
+                or helper(row -1, col-2, count+1) 
+                or helper(row +1, col-2, count+1)
+                or helper(row +2, col-1, count+1) 
+                or helper(row +2, col+1, count+1) 
+                or helper(row -1, col-2, count+1) 
+                or helper(row -1, col-2, count+1))
+    
+    helper(knightPos[0], knightPos[1], 0)
+    
+    return visitedPoints[(targetPos[0], targetPos[1])]
