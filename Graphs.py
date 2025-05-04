@@ -211,9 +211,155 @@ def minStepToReachTarget(knightPos, targetPos, n):
                 or helper(row +1, col-2, count+1)
                 or helper(row +2, col-1, count+1) 
                 or helper(row +2, col+1, count+1) 
-                or helper(row -1, col-2, count+1) 
-                or helper(row -1, col-2, count+1))
+                or helper(row -1, col+2, count+1) 
+                or helper(row -1, col+2, count+1))
     
     helper(knightPos[0], knightPos[1], 0)
     
     return visitedPoints[(targetPos[0], targetPos[1])]
+
+
+def minStepToReachTarget(knightPos, targetPos, n):
+    moves = [(-2, -1), (-2, +1), (-1, -2), (-1, +2),
+             (+1, -2), (+1, +2), (+2, -1), (+2, +1)]
+
+    visited = set()
+    queue = [(knightPos[0], knightPos[1], 0)]
+    visited.add((knightPos[0], knightPos[1]))
+
+    while queue:
+        row, col, steps = queue.pop(0)
+
+        if (row, col) == (targetPos[0], targetPos[1]):
+            return steps
+
+        for move in moves:
+            newRow = row + move[0]
+            newCol = col + move[1]
+
+            if 1 <= newRow <= n and 1 <= newCol <= n:
+                if (newRow, newCol) not in visited:
+                    visited.add((newRow, newCol)) 
+                    queue.append((newRow, newCol, steps + 1))
+
+    return -1
+
+
+
+from collections import deque
+def numIslands(grid):
+    # code here
+    visited = set()
+    n = len(grid)
+    m = len(grid[0])
+    totalIslands = 0
+    def bfsIsland(row, col):
+        queue = deque()
+        queue.append((row,col))
+        visited.add((row,col))
+        moves = [(-1,-1),(-1,0),(-1,1),(0,-1),(0,1),(1,-1),(1,0),(1,1)]
+        
+        while(queue):
+            r,c = queue.popleft()
+            for move in moves:
+                newRow = r + move[0]
+                newCol = c + move[1]
+                if newRow >=0 and newCol >=0 and newRow<n and newCol<m:
+                    if(newRow, newCol) not in visited and grid[newRow][newCol] == "L":
+                        queue.append((newRow,newCol))
+                        visited.add((newRow,newCol))
+                        
+                
+    for i in range(n):
+        for j in range(m):
+            if (i,j) not in visited and grid[i][j] == "L":
+                bfsIsland(i,j)
+                totalIslands+=1
+                
+    return totalIslands
+
+def motherVortexBruteForce(vertices, adj):
+
+    def bfs(node):
+        visited = [False] * vertices
+        queue = deque()
+        queue.append(node)
+        visited[node] = True
+        while queue:
+            current = queue.popleft()
+            neighbours = adj[current]
+            print(neighbours, visited)
+            for neighbour in neighbours:
+                if visited[neighbour] == False:
+                    queue.append(neighbour)
+                    visited[neighbour] = True
+        return visited
+    
+    for i in range(vertices):
+        result = bfs(i)
+        if all(result):
+            return i
+    return -1
+
+# still in progress
+
+
+
+def findMotherVertex(V, adj):
+    visited = [False] * V
+    stack = []
+    def dfsStack(node):
+        visited[node] = True
+        for neighbor in adj[node]:
+            if not visited[neighbor]:
+                dfsStack(neighbor)
+                stack.append(node)
+
+    dfsStack(0)
+    if all(visited):
+        return stack.pop(-1)
+    else:
+        return -1   
+
+# print(findMotherVertex(5, [
+#     [1],
+#     [2],
+#     [0, 3],
+#     [4],
+#     [],
+#     []
+# ]))
+
+from collections import deque
+def orangesRotting(grid):
+    n , m= len(grid), len(grid[0])
+    visited = [[-1] * m for _ in range(n)]
+    fresh = 0
+    queue = deque() 
+    for i in range(n):
+        for j in range(m):
+            if grid[i][j] == 2:
+                visited[i][j] == 0
+                queue.append((i,j,0))
+            elif grid[i][j] == 1:
+                fresh+=1
+
+    moves = [(1,0),(-1,0),(0,1),(0,-1)]
+    max_time = 0
+    rotted = 0
+
+    while queue:
+        r, c, t = queue.popleft()
+        for dr, dc in moves:
+            nr, nc = r+dr, c+dc
+            if (0 <= nr < n and 0 <= nc < m
+                and grid[nr][nc] == 1
+                and visited[nr][nc] == -1):
+                visited[nr][nc] = t+1
+                queue.append((nr, nc, t+1))
+                rotted += 1
+                max_time = max(max_time, t+1)
+
+    return max_time if rotted == fresh else -1
+
+print(orangesRotting( [[2,1,1],[1,1,0],[0,1,1]]))
