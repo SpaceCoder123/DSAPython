@@ -427,7 +427,27 @@ def checkLinkedList(head, root):
     
     return left or right
 
+
+def deleteNode(linkedList, value):
+    temp = linkedList
+    while temp.data != value:
+        temp = temp.next
+
+    prev = None
+    curr = temp
+    ford = curr.next
+
+    while ford is not None:
+        temp = curr.data
+        curr.data = ford.data
+        ford.data = temp
+        prev = curr
+        curr = ford
+        ford = curr.next
+
+    prev.next = None
+    
+    return linkedList
+
 head1 = createLinkedList([1,4,2,6,8])
-tree = BinaryTree(1)
-root1 = tree.build_tree([1])
-print(isSubPath(head1, root1))
+printLinkedList(deleteNode(head1, 1))

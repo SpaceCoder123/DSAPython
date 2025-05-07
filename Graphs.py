@@ -1,4 +1,5 @@
 
+from collections import deque
 
 # for node, neighbors in graph.items():
 #     print("{} node is conencted to {}".format(node, neighbors))
@@ -246,7 +247,6 @@ def minStepToReachTarget(knightPos, targetPos, n):
 
 
 
-from collections import deque
 def numIslands(grid):
     # code here
     visited = set()
@@ -304,33 +304,6 @@ def motherVortexBruteForce(vertices, adj):
 # still in progress
 
 
-
-def findMotherVertex(V, adj):
-    visited = [False] * V
-    stack = []
-    def dfsStack(node):
-        visited[node] = True
-        for neighbor in adj[node]:
-            if not visited[neighbor]:
-                dfsStack(neighbor)
-                stack.append(node)
-
-    dfsStack(0)
-    if all(visited):
-        return stack.pop(-1)
-    else:
-        return -1   
-
-# print(findMotherVertex(5, [
-#     [1],
-#     [2],
-#     [0, 3],
-#     [4],
-#     [],
-#     []
-# ]))
-
-from collections import deque
 def orangesRotting(grid):
     n , m= len(grid), len(grid[0])
     visited = [[-1] * m for _ in range(n)]
@@ -362,4 +335,105 @@ def orangesRotting(grid):
 
     return max_time if rotted == fresh else -1
 
-print(orangesRotting( [[2,1,1],[1,1,0],[0,1,1]]))
+# print(orangesRotting( [[2,1,1],[1,1,0],[0,1,1]]))
+
+# print(10**6-1)
+
+def isEscapePossible(blocked, source, target):
+    blocked_set = set(map(tuple, blocked))
+    max_area = 20000
+
+    def bfs(start, end):
+        queue = deque([tuple(start)])
+        visited = set([tuple(start)])
+        directions = [(1,0),(-1,0),(0,1),(0,-1)]
+        steps = 0
+
+        while queue and steps < max_area:
+            r, c = queue.popleft()
+            if [r, c] == end:
+                return True
+            for dr, dc in directions:
+                nr, nc = r + dr, c + dc
+                if 0 <= nr < 10**6 and 0 <= nc < 10**6:
+                    if (nr, nc) not in visited and (nr, nc) not in blocked_set:
+                        visited.add((nr, nc))
+                        queue.append((nr, nc))
+                        steps += 1
+        return steps >= max_area
+
+    return bfs(source, target) and bfs(target, source)
+
+ 
+# print(isEscapePossible([[0,1],[1,0]],[0,0],[0,2]))
+
+def levelOfX(V, adj, X):
+
+    visited = set()
+    queue = deque()
+    queue.append((0,0))
+    while queue:
+        node, level = queue.popleft()
+        visited.add(node)
+        if node == X:
+            return level
+        
+        neighbours = adj[node]
+        for neighbour in neighbours:
+            queue.append((neighbour, level+1))
+    return -1
+
+
+def isCycle(V, edges):
+    adj = [[] for _ in range(V)]
+    for u, v in edges:
+        adj[u].append(v)
+        adj[v].append(u)
+
+    visited = [False] * V
+
+    for i in range(V):
+        if not visited[i]:
+            queue = deque()
+            queue.append((i, -1))
+            visited[i] = True
+
+            while queue:
+                node, parent = queue.popleft()
+                for neighbor in adj[node]:
+                    if not visited[neighbor]:
+                        visited[neighbor] = True
+                        queue.append((neighbor, node))
+                    elif neighbor != parent:
+                        return True 
+
+    return False  # No cycle found
+
+# edges = [[0, 4], [1, 2], [1, 4], [2, 3],[3, 4]]
+# print(isCycle(5, edges))
+
+def containsCycle(self, grid):
+    n, m = len(grid), len(grid[0])
+    visited = [[False] * m for _ in range(n)]
+    def search(char, row, col, parentRow, parentCol):
+        visited[row][col] = True
+        moves = [(+1,0),(-1,0),(0,-1),(0,+1)]
+        for dr, dc in moves:
+            nr = dr + row
+            nc = dc + col
+            if 0 <= nr < n and 0 <= nc < m and grid[nr][nc] == char:
+                if not visited[nr][nc]:
+                    if search(char, nr, nc, row, col):
+                        return True
+                elif (nr, nc) != (parentRow, parentCol):
+                    return True
+    for i in range(n):
+        for j in range(m):
+            if not visited[i][j]:
+                if search(grid[i][j], i, j, -1, -1):
+                    return True
+    return False
+
+
+grid = [["a","a","a","a"],["a","b","b","a"],["a","b","b","a"],["a","a","a","a"]]
+# print(containsCycle((grid)))
