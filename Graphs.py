@@ -412,7 +412,7 @@ def isCycle(V, edges):
 # edges = [[0, 4], [1, 2], [1, 4], [2, 3],[3, 4]]
 # print(isCycle(5, edges))
 
-def containsCycle(self, grid):
+def containsCycle(grid):
     n, m = len(grid), len(grid[0])
     visited = [[False] * m for _ in range(n)]
     def search(char, row, col, parentRow, parentCol):
@@ -437,3 +437,66 @@ def containsCycle(self, grid):
 
 grid = [["a","a","a","a"],["a","b","b","a"],["a","b","b","a"],["a","a","a","a"]]
 # print(containsCycle((grid)))
+
+def xShape(grid):
+    count = 0
+    n, m = len(grid), len(grid[0])
+    visited = [[False] * m for _ in range(n)]
+
+    def getCount(row, col):
+        moves = [(0,-1),(1,0),(-1,0),(0,1)]
+        queue = deque([(row,col)])
+        while(queue):
+            node = queue.popleft()
+            for move in moves:
+                r,c = move
+                newRow = node[0] + r
+                newCol = node[1] + c
+                if newRow < 0 or newCol < 0 or newRow >= n or newCol >= m:
+                    continue
+                if grid[newRow][newCol] == 'X' and not visited[newRow][newCol]:
+                    visited[newRow][newCol] = True
+                    queue.append((newRow, newCol))
+
+
+    for row in range(n):
+        for col in range(m):
+            if grid[row][col] == "X" and visited[row][col] == False:
+                count+=1
+                getCount(row, col)
+
+    return count
+
+grid =  [["X","0","X"],["0","X","0"],["X","X","X"]]
+
+def detectCycleDirectedGraph(V, edges):
+    adj = [[] for _ in range(V)]
+    pathVisited = [False] * V
+    visited = [False] * V
+    
+    for u, v in edges:
+        adj[u].append(v)
+
+    def dfs(vertex):
+        visited[vertex] = True
+        pathVisited[vertex] = True
+        neighbours = adj[vertex]
+        for neighbour in neighbours:
+            if not visited[neighbour]:
+                if dfs(neighbour):
+                    return True
+            if pathVisited[neighbour] == True:
+                return True
+        pathVisited[vertex] = False
+        return False
+
+    for i in range(V):
+        if visited[i] is False:
+            if(dfs(i)):
+                return True
+    return False
+
+    
+grid = [[0, 1], [1, 2], [2, 3], [3, 1]]
+V = 4
+print(detectCycleDirectedGraph(V, grid))    
