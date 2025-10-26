@@ -1,10 +1,6 @@
 
 from collections import deque
 
-# for node, neighbors in graph.items():
-#     print("{} node is conencted to {}".format(node, neighbors))
-
-
 def addNode(source, destination):
     if source in graph:
         graph[source].append(destination)
@@ -496,7 +492,67 @@ def detectCycleDirectedGraph(V, edges):
                 return True
     return False
 
+
+def detectCycleDirectedGraph(V, edges):
+    adj = [[] for _ in range(V)]
+    pathVisited = [False] * V
+    visited = [False] * V
     
+    for u, v in edges:
+        adj[u].append(v)
+
+    def dfs(vertex):
+        visited[vertex] = True
+        pathVisited[vertex] = True
+        neighbours = adj[vertex]
+        for neighbour in neighbours:
+            if not visited[neighbour]:
+                if dfs(neighbour):
+                    return True
+            if pathVisited[neighbour] == True:
+                return True
+        pathVisited[vertex] = False
+        return False
+
+    for i in range(V):
+        if visited[i] is False:
+            if(dfs(i)):
+                return True
+    return False
+
+
 grid = [[0, 1], [1, 2], [2, 3], [3, 1]]
-V = 4
-print(detectCycleDirectedGraph(V, grid))    
+
+def largestCycle(edges):
+    totalLength = -1
+    n = len(edges)
+    adj = [[] for _ in range(n)]
+    for i in range(n):
+        if(edges[i] != -1):
+            adj[i].append(edges[i])
+        else:
+            adj[i] = []
+
+    
+    weights = [0]*n
+    visited = [False]*n
+
+
+    def dfs(vertex, weight):
+        if visited[vertex]:
+            return weight - weights[vertex]
+        else:
+            weights[vertex] = weight
+            visited[vertex] = True
+            neighbours = adj[vertex]
+            for neighbour in neighbours:
+                value = dfs(neighbour, weight+1)
+                return value
+            return -1
+    for i in range(n):
+        if visited[i] == False:
+            totalLength = max(totalLength, dfs(i, 0))
+
+    return totalLength
+
+# print(max(-1, 3))

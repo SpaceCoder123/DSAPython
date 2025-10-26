@@ -230,4 +230,6 @@ def maxCards(cards, k):
 #         k-=1
 #     return total
 
-print(maxCards([5, 8 ,5 ,8 ,10 ,5 ,2 ,4 ,3, 5], 2))
+# print(rotateArray([1,2,3,4,5], 7))
+
+# print( 19 % 10 )-
