@@ -19,21 +19,23 @@
 # recursion
 # memoization
 # top down approach (optional)
-
-
-def knapsack(knapWeight, n, weights, values):
-    if n == 0 or knapWeight == 0:
-        return 0
-    
-    if weights[n] <= knapWeight:
-        return max(values[n] + knapsack(knapWeight-weights[n], n-1, weights, values), knapsack(knapWeight, n-1, weights, values))
-
-    else:
-        return knapsack(knapWeight, n-1, weights, values)
     
 weights = [4, 5, 6]
-profit = [1, 2, 3]
-knapWeight = 3
+profit = [1, 3, 3]
+knapWeight = 10
 n = len(weights)
 
-print(knapsack(knapWeight, n-1, weights, profit))
+# print(knapsack(knapWeight, n-1, weights, profit))
+
+
+def knapsackRec(W, val, wt, n):
+    if n == 0 or W == 0:
+        return 0
+    pick = 0
+    if wt[n - 1] <= W:
+        pick = val[n - 1] + knapsackRec(W - wt[n - 1], val, wt, n - 1)
+    notPick = knapsackRec(W, val, wt, n - 1)
+     
+    return max(pick, notPick)
+
+print(knapsackRec(knapWeight, profit, weights, n))
