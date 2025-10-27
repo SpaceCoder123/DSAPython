@@ -38,4 +38,31 @@ def knapsackRec(W, val, wt, n):
      
     return max(pick, notPick)
 
-print(knapsackRec(knapWeight, profit, weights, n))
+# print(knapsackRec(knapWeight, profit, weights, n))
+
+# 403. Frog Jump, Leetcode hard
+def canCross(stones):
+    stone_set = set(stones)
+    visited = set()
+    
+    def canCrossRec(position, jump):
+        #base condition
+
+        if position == stones[-1]:
+            return True
+        
+        if position not in stone_set or jump<0:
+            return False
+
+        if (position,jump) in visited:
+            return False
+        
+        visited.add((position,jump))
+
+        return (
+            canCrossRec(position + jump-1, jump-1) or 
+            canCrossRec(position + jump, jump) or 
+            canCrossRec(position + jump + 1, jump+1)
+        )   
+
+    return canCrossRec(0,0)
