@@ -19,50 +19,61 @@
 # recursion
 # memoization
 # top down approach (optional)
-    
-weights = [4, 5, 6]
-profit = [1, 3, 3]
-knapWeight = 10
-n = len(weights)
 
-# print(knapsack(knapWeight, n-1, weights, profit))
-
-
-def knapsackRec(W, val, wt, n):
-    if n == 0 or W == 0:
-        return 0
-    pick = 0
-    if wt[n - 1] <= W:
-        pick = val[n - 1] + knapsackRec(W - wt[n - 1], val, wt, n - 1)
-    notPick = knapsackRec(W, val, wt, n - 1)
-     
-    return max(pick, notPick)
-
-# print(knapsackRec(knapWeight, profit, weights, n))
-
-# 403. Frog Jump, Leetcode hard
-def canCross(stones):
-    stone_set = set(stones)
-    visited = set()
-    
-    def canCrossRec(position, jump):
-        #base condition
-
-        if position == stones[-1]:
-            return True
+class DynamicProgramming:
+    def knapsackRec(self, W, val, wt, n):
+        if n == 0 or W == 0:
+            return 0
+        pick = 0
+        if wt[n - 1] <= W:
+            pick = val[n - 1] + self.knapsackRec(W - wt[n - 1], val, wt, n - 1)
+        notPick = self.knapsackRec(W, val, wt, n - 1)
         
-        if position not in stone_set or jump<0:
-            return False
+        return max(pick, notPick)
 
-        if (position,jump) in visited:
-            return False
+    # def isMatch(self, s, p):
+    #     funcLen = len(p)
+    #     strLen = len(s)
+    #     if p == "*":
+    #         return True
+    #     def isMatchHelper(strIndex, funcIndex):
+    #         print(strIndex, funcIndex)
+    #         if strIndex >= strLen or funcIndex >= funcLen:
+    #             if funcIndex >= funcLen-1 and strIndex >= strLen-1 :
+    #                 return True
+    #             else:
+    #                 return False
+            
+    #         if p[funcIndex] == "*":
+    #             prevChar = s[funcIndex - 1]
+
+    #             while(strIndex < strLen - 1  and s[strIndex] == prevChar):
+    #                 strIndex+=1
+    #             return isMatchHelper(strIndex+1, funcIndex+1)
+
+    #         if (s[strIndex] != p[funcIndex]):
+    #             if (strIndex >= strLen-1 or funcIndex >= funcLen - 1):
+    #                 return False
+
+    #         if s[strIndex] == p[funcIndex]:
+    #             return isMatchHelper(strIndex+1, funcIndex+1)
+
+    #         return isMatchHelper(strIndex+1, funcIndex+1)
         
-        visited.add((position,jump))
+    #     return isMatchHelper(0, 0)
 
-        return (
-            canCrossRec(position + jump-1, jump-1) or 
-            canCrossRec(position + jump, jump) or 
-            canCrossRec(position + jump + 1, jump+1)
-        )   
-
-    return canCrossRec(0,0)
+    def longestCommonSubsequence(self, text1, text2):
+        memo = {}
+        def helper(idx1, idx2):
+            if idx1 == len(text1) or idx2 == len(text2):
+                return 0
+            if (idx1, idx2) in memo:
+                return memo[(idx1, idx2)]
+            
+            if text1[idx1] == text2[idx2]:
+                value = 1 + helper(idx1+1, idx2+1)
+            else:
+                value = max(helper(idx1, idx2+1), helper(idx1+1, idx2))
+            memo[(idx1, idx2)] = value
+            return value
+        return helper(0,0)
