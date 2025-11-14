@@ -160,6 +160,3 @@ class DynamicProgramming:
                 count = right * 2
                 totalcount= max(count, totalcount)
         return totalcount
-    
-    def reverseString(string):
-        return 
