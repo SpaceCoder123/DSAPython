@@ -20,6 +20,8 @@
 # memoization
 # top down approach (optional)
 
+from collections import deque
+
 class DynamicProgramming:
     def knapsackRec(self, W, val, wt, n):
         if n == 0 or W == 0:
@@ -77,3 +79,87 @@ class DynamicProgramming:
             memo[(idx1, idx2)] = value
             return value
         return helper(0,0)
+    
+    def longestPalindromicSubstring(self, string):
+        start, end = 0,0
+        for i in range(len(string)):
+            left1, right1 = self.checkPalindrome(i, i)
+            left2, right2 = self.checkPalindrome(i,i+1)
+
+            if right1 - left1 > end - start:
+                start, end = left1, right1
+            if right2 - left2 > end - start:
+                start, end = left2, right2
+        return string[start:end+1]
+    
+    def checkPalindrome(self, center, string):
+        left = center
+        right = center
+        while(left >= 0 and right < len(string) and string[left] == string[right]):
+            left-=1
+            right+=1
+        return (left+1, right-1)
+
+    #O(n) space -> stack and O(n) time, 
+    def longestValidParentheses(self, s):
+        stack = deque()
+        stack.append((-1, -1))
+        maxLen = 0
+
+        for idx, char in enumerate(s):
+            tos_char, tos_idx = stack[-1]
+
+            if char == '(':
+                stack.append((char, idx))
+            else:
+                if tos_char == '(':
+                    stack.pop()
+                    new_tos_char, new_tos_idx = stack[-1]
+                    maxLen = max(maxLen, idx - new_tos_idx)
+
+                else:
+                    stack.append((char, idx))
+        return maxLen
+
+    #O(n) time and O(1) space
+    def longestValidParentheses(self, s):
+        return max(self.leftToRight(s), self.rightToLeft(s))
+    
+    def leftToRight(self, string):
+        left = 0
+        right = 0
+        totalcount = 0
+        count = 0
+        for i in string:
+            if i == "(":
+                left+=1
+            else:
+                right+=1
+            if right > left:
+                right = 0
+                left = 0
+            if right == left:
+                count = left * 2
+                totalcount= max(count, totalcount)
+        return totalcount
+    
+    def rightToLeft(self, string):
+        left = 0
+        right = 0
+        totalcount = 0
+        count = 0
+        for i in string[::-1]:
+            if i == "(":
+                left+=1
+            else:
+                right+=1
+            if left > right:
+                right = 0
+                left = 0
+            if right == left:
+                count = right * 2
+                totalcount= max(count, totalcount)
+        return totalcount
+    
+    def reverseString(string):
+        return 
