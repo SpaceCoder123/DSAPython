@@ -33,37 +33,6 @@ class DynamicProgramming:
         
         return max(pick, notPick)
 
-    # def isMatch(self, s, p):
-    #     funcLen = len(p)
-    #     strLen = len(s)
-    #     if p == "*":
-    #         return True
-    #     def isMatchHelper(strIndex, funcIndex):
-    #         print(strIndex, funcIndex)
-    #         if strIndex >= strLen or funcIndex >= funcLen:
-    #             if funcIndex >= funcLen-1 and strIndex >= strLen-1 :
-    #                 return True
-    #             else:
-    #                 return False
-            
-    #         if p[funcIndex] == "*":
-    #             prevChar = s[funcIndex - 1]
-
-    #             while(strIndex < strLen - 1  and s[strIndex] == prevChar):
-    #                 strIndex+=1
-    #             return isMatchHelper(strIndex+1, funcIndex+1)
-
-    #         if (s[strIndex] != p[funcIndex]):
-    #             if (strIndex >= strLen-1 or funcIndex >= funcLen - 1):
-    #                 return False
-
-    #         if s[strIndex] == p[funcIndex]:
-    #             return isMatchHelper(strIndex+1, funcIndex+1)
-
-    #         return isMatchHelper(strIndex+1, funcIndex+1)
-        
-    #     return isMatchHelper(0, 0)
-
     def longestCommonSubsequence(self, text1, text2):
         memo = {}
         def helper(idx1, idx2):
