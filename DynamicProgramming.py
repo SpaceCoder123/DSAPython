@@ -129,3 +129,42 @@ class DynamicProgramming:
                 count = right * 2
                 totalcount= max(count, totalcount)
         return totalcount
+    
+    # (memory exceeded)
+    def canJump(self, nums):
+        n = len(nums)
+        memo = set()
+        
+        def canJumpHelder(index):
+            if index == n - 1:
+                return True
+            
+            if index >= n:
+                return False
+            
+            if index in memo:
+                return False
+            
+            max_jump = index + nums[index]
+            
+            for next_index in range(index + 1, max_jump + 1):
+                if canJumpHelder(next_index):
+                    return True
+            memo.add(index)
+            return False
+        
+        return canJumpHelder(0)
+
+    #optimal
+    def canJump(self, nums):
+        max_reach = 0
+        
+        for i in range(len(nums)):
+            if i > max_reach:
+                return False
+            
+            max_reach = max(max_reach, i + nums[i])
+            
+            if max_reach >= len(nums) - 1:
+                return True
+        return True

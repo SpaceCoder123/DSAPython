@@ -1,13 +1,10 @@
 class RecursionProblems:
-
     def getTotal(self, number):
         if(number <= 0):
             return 0
         if(number == 1):
             return 1
         return number%10 + self.getTotal(number//10)
-
-
 
     def palindrome(self, string, start, end):
         if(start>=end):
@@ -21,18 +18,12 @@ class RecursionProblems:
         if(n == 0):
             return 1
         self.theSequence(n-1)
-        
-
-    # print(theSequence(2))
 
     def printElements(self, arr,n):
         if(n==0):
             return 0 
         self.printElements(arr,n-1)
         return 0
-
-
-    # printElements(L,len(L))
 
     def CountDigits(self, n):
         if(n<1):
@@ -44,8 +35,6 @@ class RecursionProblems:
             return 1
         return self.recursiveSum(n-1) * n
 
-    # print(recursiveSum(4))
-
     def fibonacci(self,n):
         if(n==0):
             return 0
@@ -53,17 +42,12 @@ class RecursionProblems:
             return 1
         return self.fibonacci(n-1)+self.fibonacci(n-2)
 
-    # print(fibonacci(20))
-    # 0 1 1 2 3 5 8 13 21 34 55
-
     def nCr(self,n,r):
         if(r==1):
             return n
         if(n==r):
             return 1
         return self.nCr(n-1,r-1) + self.nCr(n-1,r)
-
-    # print(nCr(5,2))
 
     def isPalin(self,N):
         result = self.checkPalindrome(N, 0, len(N)-1)
@@ -73,9 +57,6 @@ class RecursionProblems:
         if(startIndex >= endIndex):
             return True
         return N[startIndex] == N[endIndex] and self.checkPalindrome(N, startIndex+1, endIndex-1)
-
-    # print(isPalin("malayalam"))
-
 
     def ropeCuttingProblem(self, n, a, b, c):
         if n == 0:
@@ -153,15 +134,6 @@ class RecursionProblems:
                 maxSum = max(localSum, maxSum)
             return maxSum
 
-    # def firstMissingPositive(nums):
-    #     smallest = float("inf")
-    #     for i in nums:
-    #         if i < smallest and i >= 0:
-    #             i = smallest
-
-    # print(maxSubArraySum([-8, -3, -6, -2, -5, -4]))
-
-
     def RecursionSubset(self,nums, rest):
         if len(rest) == 0:
             return [nums]
@@ -186,14 +158,6 @@ class RecursionProblems:
         left.extend(right)
 
         return list(set(left))
-
-    # print(bracketGenerator("",0,4)) 
-    # ["((())())","(())()()","(()(()))","((()))()","()(()())","(()()())","()(())()","()()()()","((()()))","()()(())","(()())()","()((()))","(((())))"]
-    # ["(((())))","((()()))","((())())","((()))()","(()(()))","(()()())","(()())()","(())()()","()((()))","()(()())","()(())()","()()(())","()()()()"]
-
-
-    # (())(())
-
 
     def reverseNumber(self,number, reversed = 0):
         if number <= 0:
