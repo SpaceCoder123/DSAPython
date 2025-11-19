@@ -250,3 +250,56 @@ class RecursionProblems:
                 elements[i] , elements[index] = elements[index] , elements[i]
         permutations(0)
         return result
+    
+    def subsets(self, nums):
+        result = []
+        def backtrack(path, k):
+            result.append(path[:])
+            for i in range(k, len(nums)):
+                path.append(nums[i])
+                backtrack(path, i+1)
+                path.pop()
+        backtrack([],0)        
+        return result
+    
+    def subsetsWithDup(self, nums):
+        result = []
+        def backtrack(path, k):
+            result.append(path[:])
+            for i in range(k, len(nums)):
+                path.append(nums[i])
+                backtrack(path, i+1)
+                path.pop()
+        backtrack([],0)        
+        return result
+    
+    def combine(self, n, level):
+        nums = list(range(1, n+1))
+        result = []
+        def backtrack(path, k, level):
+            if len(path) ==  level:
+                result.append(path[:])
+            elif len(path) > level:
+                return
+            for i in range(k, len(nums)):
+                path.append(nums[i])
+                backtrack(path, i+1, level)
+                path.pop()
+        backtrack([],0,level)        
+        return result
+
+    def combinationSum(self, nums, target):
+        result = []
+        def backtrack(path, target, index):
+            if target < 0:
+                return
+            if target == 0:
+                result.append(path[:])
+                return
+            for i in range(index, len(nums)):
+                number = target - nums[i] 
+                path.append(nums[i])
+                backtrack(path, number, i)
+                path.pop()
+        backtrack([], target,0)        
+        return result
