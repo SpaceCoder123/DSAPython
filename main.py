@@ -1,9 +1,8 @@
-from DynamicProgramming import DynamicProgramming
 from Recursion import RecursionProblems
+from Util import UtilityMethods
+# dyn = DynamicProgramming()
 
-dyn = DynamicProgramming()
-
-s = "()(()))))()(())"
+# s = "()(()))))()(())"
 # print(dyn.longestValidParentheses(s))
 
 # arr = [[1,2,3],[4,5,6],[7,8,0]]
@@ -14,7 +13,11 @@ s = "()(()))))()(())"
 
 rec = RecursionProblems()
 # L = [1,2,2]
-n= 3
-k= 7
-# print(rec.subsets(L))
-print(rec.combinationSum(n,k))
+# n= [1,2,2]
+# k= 4
+# # print(rec.subsets(L))
+n = 1
+print(rec.grayCode(n))
+
+# util = UtilityMethods()
+# print(util.binaryToDecimal("11110"))

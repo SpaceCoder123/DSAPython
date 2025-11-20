@@ -1,3 +1,4 @@
+from Util import UtilityMethods
 class RecursionProblems:
     def getTotal(self, number):
         if(number <= 0):
@@ -267,6 +268,8 @@ class RecursionProblems:
         def backtrack(path, k):
             result.append(path[:])
             for i in range(k, len(nums)):
+                if i > k and nums[i] == nums[i-1]:
+                    continue
                 path.append(nums[i])
                 backtrack(path, i+1)
                 path.pop()
@@ -303,3 +306,54 @@ class RecursionProblems:
                 path.pop()
         backtrack([], target,0)        
         return result
+
+    def combinationSum2(self, nums, target):
+        nums.sort()
+        result = []
+        def backtrack(path, target, index):
+            if target < 0:
+                return
+            if target == 0:
+                result.append(path[:])
+                return
+            for i in range(index, len(nums)):
+                if i < index and nums[i] == nums[i-1]:
+                    print("skipping")
+                    continue
+                number = target - nums[i]   
+                path.append(nums[i])
+                backtrack(path, number, i+1)
+                path.pop()
+        backtrack([], target,0)        
+        return result
+
+    def grayCode(self, n):
+        util = UtilityMethods()
+        result = []
+        def getSequence(path):
+            if len(path) == n:
+                result.append(util.binaryToDecimal(path))
+                return
+            getSequence(path+"0")
+            getSequence(path+"1")
+        getSequence("")
+        return self.reverseHalfArray(result)
+
+    def reverseHalfArray(self, arr):
+        n = len(arr)-1
+        first = n//2+1
+        last = n
+        while first < last:
+            arr[last], arr[first] = arr[first], arr[last]
+            first+=1
+            last-=1
+        return arr
+ 
+    def grayCodeXOR(self, n):
+        result = []
+        total = 1 << n
+        for i in range(total):
+            result.append(i ^ (i >> 1))
+        return result
+
+
