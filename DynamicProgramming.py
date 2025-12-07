@@ -160,3 +160,18 @@ class DynamicProgramming:
             if max_reach >= len(nums) - 1:
                 return True
         return True
+    
+    def climbStairs(self, n):
+        memo = {}
+        def helper(s, value):
+            if s > n:
+                return 0
+            if s==n:
+                return value + 1
+            if s in memo:
+                return memo[s]
+            single = helper(s+1, value)
+            double = helper(s+2, value)
+            memo[s] = single+double
+            return single+double
+        return helper(0,0)

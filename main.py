@@ -1,6 +1,7 @@
 from Recursion import RecursionProblems
 from Util import UtilityMethods
-# dyn = DynamicProgramming()
+from DynamicProgramming import DynamicProgramming
+dyn = DynamicProgramming()
 
 # s = "()(()))))()(())"
 # print(dyn.longestValidParentheses(s))
@@ -11,13 +12,20 @@ from Util import UtilityMethods
 # values = [2,1,0,1]
 # print(dyn.canJump(values))
 
-rec = RecursionProblems()
+# rec = RecursionProblems()k
 # L = [1,2,2]
 # n= [1,2,2]
 # k= 4
 # # print(rec.subsets(L))
-n = 1
-print(rec.grayCode(n))
+# n = 3
+# print(rec.grayCode(n))
 
 # util = UtilityMethods()
 # print(util.binaryToDecimal("11110"))
+
+print(dyn.climbStairs(30))
+# print(rec.NQueens(10))
+# print(thisdict["brand"])
+
+# if "brand" in thisdict:
+#     print("True")

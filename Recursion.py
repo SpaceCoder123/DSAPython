@@ -356,4 +356,75 @@ class RecursionProblems:
             result.append(i ^ (i >> 1))
         return result
 
+    #bruteforce
+    def NQueens(self, n):
+        if n == 1:
+            return [["Q"]]
+        if n < 4:
+            return False
 
+        board = [["-"] * n for _ in range(n)]
+
+        def solve(board, queensLeft):
+            if queensLeft == 0:
+                return board
+
+            freeCells = []
+            for r in range(n):
+                for c in range(n):
+                    if board[r][c] == "-":
+                        freeCells.append((r, c))
+
+            for r, c in freeCells:
+                newBoard = [row[:] for row in board]
+                newBoard[r][c] = "Q"
+                newBoard = self.markSquares(newBoard, r, c)
+
+                result = solve(newBoard, queensLeft - 1)
+                if result:
+                    return result
+
+            return False
+
+        return solve(board, n)
+
+
+    def markSquares(self, board, row, col):
+        n = len(board)
+
+        for i in range(row, n):
+            if board[i][col] != "Q":
+                board[i][col] = "X"
+
+        for i in range(col, n):
+            if board[row][i] != "Q":
+                board[row][i] = "X"
+
+        for i in range(col, -1, -1):
+            if board[row][i] != "Q":
+                board[row][i] = "X"
+
+        r, c = row, col
+        while r < n and c >= 0:
+            if board[r][c] != "Q":
+                board[r][c] = "X"
+            r += 1
+            c -= 1
+
+        r, c = row, col
+        while r < n and c < n:
+            if board[r][c] != "Q":
+                board[r][c] = "X"
+            r += 1
+            c += 1
+
+        return board
+
+
+    def getQueenPosition(self, board):
+        n = len(board)
+        for i in range(n):
+            for j in range(n):
+                if board[i][j] == "-":
+                    return (i, j)
+        return (-1, -1)
