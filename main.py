@@ -23,9 +23,18 @@ dyn = DynamicProgramming()
 # util = UtilityMethods()
 # print(util.binaryToDecimal("11110"))
 
-print(dyn.climbStairs(30))
-# print(rec.NQueens(10))
+# print(rec.NQueens(10))"leetcode", word2 = "etco"
 # print(thisdict["brand"])
 
 # if "brand" in thisdict:
 #     print("True")
+
+# triangle = [[2],[3,4],[6,5,7],[4,1,8,3]]
+
+houses = [1,2,3]
+coins = [4,2,1]
+target = 32
+
+print(dyn.combinationSum4(coins, target))
+
+# print("2">"1")
