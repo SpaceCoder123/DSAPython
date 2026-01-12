@@ -1,40 +1,40 @@
-from Recursion import RecursionProblems
-from Util import UtilityMethods
-from DynamicProgramming import DynamicProgramming
-dyn = DynamicProgramming()
+# from OOPS.Stack.MyStack import MyStack
 
-# s = "()(()))))()(())"
-# print(dyn.longestValidParentheses(s))
+# obj = MyStack()
+# obj.push(1)
+# obj.push(2)
+# param_2 = obj.pop()
+# param_3 = obj.top()
+# param_4 = obj.empty()
 
-# arr = [[1,2,3],[4,5,6],[7,8,0]]
-# target = [4,5,6]
-# print(target in arr)
-# values = [2,1,0,1]
-# print(dyn.canJump(values))
+# # print(param_2,param_3, param_4)
 
-# rec = RecursionProblems()k
-# L = [1,2,2]
-# n= [1,2,2]
-# k= 4
-# # print(rec.subsets(L))
-# n = 3
-# print(rec.grayCode(n))
+from StackProblems import StackProblems
+obj1 = StackProblems()
+# string = "([])"   
+# print(obj1.isValid(string))
 
-# util = UtilityMethods()
-# print(util.binaryToDecimal("11110"))
+path = "/.../a/../b/c/../d/./"
 
-# print(rec.NQueens(10))"leetcode", word2 = "etco"
-# print(thisdict["brand"])
+print(obj1.simplifyPath(path))
+#  minStack = new MinStack();
+# minStack.push(-2);
+# minStack.push(0);
+# minStack.push(-3);
+# minStack.getMin(); // return -3
+# minStack.pop();
+# minStack.top();    // return 0
+# minStack.getMin(); // return -2
 
-# if "brand" in thisdict:
-#     print("True")
+# from OOPS.Stack.MinStack import MinStack
 
-# triangle = [[2],[3,4],[6,5,7],[4,1,8,3]]
-
-houses = [1,2,3]
-coins = [4,2,1]
-target = 32
-
-print(dyn.combinationSum4(coins, target))
-
-# print("2">"1")
+# obj = MinStack()
+# obj.push(-2)
+# obj.push(0)
+# obj.push(-3)
+# obj.printStack()
+# print(obj.getMin())
+# print(obj.pop())
+# obj.top()
+# print(obj.getMin())
+# obj.printStack()
