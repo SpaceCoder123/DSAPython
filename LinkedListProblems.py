@@ -1,6 +1,4 @@
 from OOPS.LinkedList.LinkedListNode import LinkedListNode 
-from OOPS.BinaryTree.BinaryTree import BinaryTree
-from OOPS.BinaryTree.TreeNode import TreeNode
 
 class LinkedListProblems:
     def printLinkedList(self, head):
@@ -25,37 +23,26 @@ class LinkedListProblems:
         rightPtr = head
         leftPtr = head
         startPtr = head
-
         count = 0
-
         while(rightPtr != None):
             count+=1
             rightPtr = rightPtr.next
-
         rightPtr = head
-
         if(count<k):
             k = k % count
-
         if(k == count or count == 1 or k == 0):
             return head
         i= 0
-
         while(i<k):
             rightPtr = rightPtr.next
             i+=1
-
-
         while(rightPtr.next != None):
             rightPtr = rightPtr.next
             leftPtr = leftPtr.next
-
         head = leftPtr.next
         leftPtr.next = None
         rightPtr.next = startPtr
-
         return head
-
 
     def getCount(self, head):
         temp = head
@@ -117,9 +104,8 @@ class LinkedListProblems:
             steps -= 1
 
         return temp.data
-
+   
     # two pointers approach
-
     def getKthFromLast(self, head, k):
         first = second = head
 
@@ -134,7 +120,6 @@ class LinkedListProblems:
             second = second.next
 
         return second.data
-
 
     def removeDuplicates(self, head):
         temp = head
@@ -157,9 +142,7 @@ class LinkedListProblems:
 
         return True
 
-
     def insertInMiddle( self, head, x):
-        #code here
         if head is None:
             head = LinkedListNode(x)
             return head
@@ -170,7 +153,6 @@ class LinkedListProblems:
         middle.next = LinkedListNode(x)
         middle.next.next = var
         return head
-
 
     def getMiddleElement(self, head):
         slow = head
@@ -187,9 +169,6 @@ class LinkedListProblems:
             if(temp.next == None):
                 return head
             temp = temp.next
-
-
-
         nextNode = temp.next
         temp.next = LinkedListNode(data)
         temp.next.next = nextNode
@@ -282,7 +261,6 @@ class LinkedListProblems:
             curr = curr.next
         return self.reverseList(reversedHead)
 
-
     #still in progress
     def reverseBetween(self, head, left, right):
         if not head or left == right:
@@ -335,7 +313,6 @@ class LinkedListProblems:
             temp = temp.next            
         return highestElement
 
-
     def pairSumStack(self, head):
         if not head or not head.next:
             return 0
@@ -378,7 +355,6 @@ class LinkedListProblems:
                 break
         return head
 
-
     # 1367. Merge between linked lists
     def mergeInBetween(self, list1, a, b, list2):
         temp = list2
@@ -398,8 +374,6 @@ class LinkedListProblems:
         prev.next = start
         temp.next = tail
         return list1
-
-
 
     # 1367. Linked List in Binary Tree
     def isSubPath(self, head, root):
@@ -425,7 +399,6 @@ class LinkedListProblems:
         
         return left or right
 
-
     def deleteNode(self, linkedList, value):
         temp = linkedList
         while temp.data != value:
@@ -446,5 +419,3 @@ class LinkedListProblems:
         prev.next = None
         
         return linkedList
-    
-    
