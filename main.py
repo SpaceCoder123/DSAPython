@@ -14,9 +14,7 @@ obj1 = StackProblems()
 # string = "([])"   
 # print(obj1.isValid(string))
 
-path = "/.../a/../b/c/../d/./"
 
-print(obj1.simplifyPath(path))
 #  minStack = new MinStack();
 # minStack.push(-2);
 # minStack.push(0);
@@ -38,3 +36,6 @@ print(obj1.simplifyPath(path))
 # obj.top()
 # print(obj.getMin())
 # obj.printStack()
+
+nums =[30,60,90]
+print(obj1.dailyTemperatures(nums))

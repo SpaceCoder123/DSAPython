@@ -53,6 +53,8 @@ class StackProblems:
                 
         return len(stack) == 0
     
+
+    # time complexity O(3N) ~ O(N), Space complexity = O(N) use of stack.
     def simplifyPath(self, path):
         args = path.split("/")
         if path == "" or path == "/":
@@ -76,3 +78,87 @@ class StackProblems:
 
 
         return "/"+"/".join(args[::-1])
+    
+    # alternate solution given by GPT, works as well.
+
+    def simplifyPath2(self, path: str) -> str:
+        stack = deque()
+
+        for part in path.split("/"):
+            if part == "" or part == ".":
+                continue
+            elif part == "..":
+                if stack:
+                    stack.pop()
+            else:
+                stack.append(part)
+
+        return "/" + "/".join(stack)
+
+    def removeComments(self, source):
+        for i in source:
+            print(i)
+        return source
+
+    def nextGreaterElement(self, nums1, nums2):
+        nextGreatest = [-1]*len(nums2)
+
+        monStack = deque()
+        for i in range(len(nums2)):
+            if len(monStack) == 0:
+                monStack.append(i)
+            else:
+                if nums2[i] > nums2[monStack[-1]]:
+                    while(len(monStack)>0 and nums2[i] > nums2[monStack[-1]]):
+                        popped = monStack.pop()
+                        nextGreatest[popped] = nums2[i]
+                monStack.append(i)
+
+        result = [-1]*len(nums1)
+        for i in range(len(nums1)):
+            result[i] = nextGreatest[nums2.index(nums1[i])]
+        return result
+    
+    def nextGreaterElement(self, nums1, nums2):
+        nge = {}
+        stack = deque()
+
+        for num in nums2:
+            while stack and num > stack[-1]:
+                nge[stack.pop()] = num
+            stack.append(num)
+
+        while stack:
+            nge[stack.pop()] = -1
+
+        return [nge[num] for num in nums1]
+    
+    def dailyTemperatures(self, temperatures):
+        result = [0] * len(temperatures)
+        monStack = deque()
+
+        for i in range(len(temperatures)):
+            if len(monStack) == 0:
+                monStack.append(i)
+            else:
+                if temperatures[i] > temperatures[monStack[-1]]:
+                    while(len(monStack)>0 and temperatures[i] > temperatures[monStack[-1]]):
+                        popped = monStack.pop()
+                        result[popped] = i
+                monStack.append(i)
+
+        for i in range(len(temperatures)):
+            if result[i] != 0:
+                result[i] = result[i] - i
+        return result
+    
+    def dailyTemperatures(self, temperatures):
+        n = len(temperatures)
+        result = [0] * n
+        stack = deque()
+        for i in range(n):
+            while stack and temperatures[i] > temperatures[stack[-1]]:
+                prev = stack.pop()
+                result[prev] = i - prev
+            stack.append(i)
+        return result
