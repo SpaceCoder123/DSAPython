@@ -1,41 +1,9 @@
-# from OOPS.Stack.MyStack import MyStack
-
-# obj = MyStack()
-# obj.push(1)
-# obj.push(2)
-# param_2 = obj.pop()
-# param_3 = obj.top()
-# param_4 = obj.empty()
-
-# # print(param_2,param_3, param_4)
-
-from StackProblems import StackProblems
-obj1 = StackProblems()
-# string = "([])"   
-# print(obj1.isValid(string))
-
-
-#  minStack = new MinStack();
-# minStack.push(-2);
-# minStack.push(0);
-# minStack.push(-3);
-# minStack.getMin(); // return -3
-# minStack.pop();
-# minStack.top();    // return 0
-# minStack.getMin(); // return -2
-
-# from OOPS.Stack.MinStack import MinStack
-
-# obj = MinStack()
-# obj.push(-2)
-# obj.push(0)
-# obj.push(-3)
-# obj.printStack()
-# print(obj.getMin())
-# print(obj.pop())
-# obj.top()
-# print(obj.getMin())
-# obj.printStack()
-
-nums =[30,60,90]
-print(obj1.dailyTemperatures(nums))
+from SortingProblems import SortingProblems
+# list = [3,5,-6,2,-1,4]
+# prob = StackProblems()
+# s = "()"
+# print(prob.asteroidCollision(list))
+mass = 5
+asteroids = [4,9,23,4]
+prob = SortingProblems()
+print(prob.asteroidsDestroyed(mass, asteroids))

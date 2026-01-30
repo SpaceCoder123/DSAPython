@@ -1,5 +1,7 @@
 from OOPS.Stack.MyStack import MyStack
 from collections import deque
+import math
+
 class StackProblems:
 
     def evalRPN(self, tokens):
@@ -162,3 +164,57 @@ class StackProblems:
                 result[prev] = i - prev
             stack.append(i)
         return result
+    
+    def asteroidCollision(self, asteroids):
+        stack = deque()
+
+        for asteroid in asteroids:
+            alive = True
+
+            while stack and stack[-1] > 0 and asteroid < 0:
+                if stack[-1] < -asteroid:
+                    stack.pop()
+                    continue
+                elif stack[-1] == -asteroid:
+                    stack.pop()
+                alive = False
+                break
+
+            if alive:
+                stack.append(asteroid)
+
+        return list(stack)
+
+    
+    def minAddToMakeValid(self, s):
+        open = 0
+        close = 0
+        for i in s:
+            if i == "(":
+                open+=1
+            else:
+                if open > 0:
+                    open-=1
+                else:
+                    close+=1
+        return open+close
+    
+    def minInsertions(self, s):
+        open = 0
+        close = 0
+        for i in s:
+            if i == "(":
+                open+=2
+            else:
+                if open == 0:
+                    close+=1
+                else:
+                    open-=1
+        if close % 2 == 0:
+            close = close/2
+        else:
+            close = self.ceildiv(close,2)+1
+        return open+close
+    
+    def ceildiv(self, a, b):
+        return -(a // -b)

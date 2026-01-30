@@ -7,7 +7,7 @@ class LinkedListProblems:
             print(temp.data,"==>", end=" ")
             temp = temp.next
 
-    def createLinkedList(list):
+    def createLinkedList(self, list):
         head = LinkedListNode(list[0])
         temp = head
         for i in range(1,len(list)):
@@ -419,3 +419,42 @@ class LinkedListProblems:
         prev.next = None
         
         return linkedList
+    
+    # 143. Reorder List
+    def reorderList(self, head):
+        if head.next == None or head.next.next == None:
+            return head
+
+        slow = head
+        fast = head
+        while fast.next and fast.next.next:
+            slow = slow.next
+            fast = fast.next.next
+
+        second = self.reverseList(slow.next)
+        slow.next = None
+        
+        return self.mergeAlternately(head, second)
+    
+    def mergeAlternately(self, l1, l2):
+        if not l1:
+            return l2
+        if not l2:
+            return l1
+
+        head = l1
+
+        while l1 and l2:
+            l1_next = l1.next
+            l2_next = l2.next
+
+            l1.next = l2
+            if not l1_next:
+                break
+
+            l2.next = l1_next
+
+            l1 = l1_next
+            l2 = l2_next
+
+        return head
