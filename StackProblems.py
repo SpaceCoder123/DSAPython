@@ -218,3 +218,51 @@ class StackProblems:
     
     def ceildiv(self, a, b):
         return -(a // -b)
+
+    def decodeString(self, s):
+        pass
+
+
+    # Nearest Smaller Element InterviewBit and GFG
+    def previousSmallerElement(self, arr):
+        n = len(arr)
+        result = [-1]*n
+        stack = deque()
+        for i in range(n):
+            print(stack)
+            if len(stack) == 0:
+                stack.append(i)
+            else:
+                if arr[stack[-1]] < arr[i]:
+                    result[i] = arr[stack[-1]]
+                    stack.append(i)
+                else:
+                    while(stack and arr[stack[-1]] >= arr[i]):
+                        stack.pop()
+                    result[i] = arr[stack[-1]] if stack else -1
+                    stack.append(i)
+        return result
+    
+    def StockSpan(self, arr):
+        stack = deque()
+        result = [1]*len(arr)
+        for i in range(len(arr)):
+            print(stack)
+            if len(stack) == 0:
+                stack.append((arr[i],1))   
+                result[i] = 1 
+            else:
+                value, count = stack[-1]
+                if value > arr[i]:
+                    stack.append((arr[i],1))
+                    result[i] = 1 
+                else:
+                    counter = 1
+                    while(stack and stack[-1][0] <= arr[i]):
+                        value, count = stack.pop()
+                        counter += count
+
+                    stack.append((arr[i], counter))   
+                    result[i] = counter    
+
+        return result

@@ -1,9 +1,5 @@
-from SortingProblems import SortingProblems
+from StackProblems import StackProblems
 # list = [3,5,-6,2,-1,4]
-# prob = StackProblems()
-# s = "()"
-# print(prob.asteroidCollision(list))
-mass = 5
-asteroids = [4,9,23,4]
-prob = SortingProblems()
-print(prob.asteroidsDestroyed(mass, asteroids))
+prob = StackProblems()
+s = [100,80,60,70,60,75,85]
+print(prob.StockSpan(s))

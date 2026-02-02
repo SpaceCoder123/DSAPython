@@ -8,7 +8,3 @@ class SortingProblems:
             else:
                 return False
         return True
-    
-    def decodeString(self, s):
-        
-        return
