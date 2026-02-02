@@ -222,7 +222,6 @@ class StackProblems:
     def decodeString(self, s):
         pass
 
-
     # Nearest Smaller Element InterviewBit and GFG
     def previousSmallerElement(self, arr):
         n = len(arr)
@@ -261,8 +260,6 @@ class StackProblems:
                     while(stack and stack[-1][0] <= arr[i]):
                         value, count = stack.pop()
                         counter += count
-
                     stack.append((arr[i], counter))   
                     result[i] = counter    
-
         return result
