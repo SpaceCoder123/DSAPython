@@ -263,3 +263,20 @@ class StackProblems:
                     stack.append((arr[i], counter))   
                     result[i] = counter    
         return result
+    
+    def removeDuplicateLetters(self, s):
+        count = {}
+        for ch in s:
+            count[ch] = count.get(ch, 0) + 1
+        stack = deque()
+        used = set()
+        for ch in s:
+            count[ch] -= 1
+            if ch in used:
+                continue
+            while stack and stack[-1] > ch and count[stack[-1]] > 0:
+                removed = stack.pop()
+                used.remove(removed)
+            stack.append(ch)
+            used.add(ch)
+        return "".join(stack)
