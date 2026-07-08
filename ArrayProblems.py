@@ -212,3 +212,51 @@ class ArraysProblems:
             max_total = max(max_total, total)
 
         return max_total        
+    
+    
+    # def spiralOrder(self, matrix):
+    #     visited = set()
+    #     rows = len(matrix)
+    #     cols = len(matrix[0])
+    #     result = []
+    #     def helper(topX, topY, leftX, leftY, rightX, rightY, bottomX, bottomY, rows, cols):
+    #         for i in range(len(matrix[topX])):
+    #             if (i, topY) not in visited:
+    #                 visited.add((i,topY))
+    #                 result.append(matrix[topX][i])
+            
+    #         for i in range(matrix[topX]):
+    #             if (i, topX) not in visited:
+    #                 visited.add((i,topX))
+    #                 result.append(matrix[i][topX])
+
+    #         print(result)
+    #     return helper(0,0,rows,0,rows,cols,0, cols, rows,cols)
+
+    def findDuplicate(self, nums):
+        slow = nums[0]
+        fast = nums[slow]
+        while True:
+            slow = nums[slow]
+            fast = nums[nums[fast]]
+            if slow == fast:
+                break
+        slow = nums[0]
+        while slow != fast:
+            slow = nums[slow]
+            fast = nums[fast]
+        
+        return slow
+
+    def missingNumbers(self, arr, low, high):
+        size = high - low + 1
+        exists = [0] * size
+        for num in arr:
+            if num >= low and num <= high:
+                    exists[num-low] = 1
+        
+        missing = []
+        for i in range(size):
+            if exists[i] == 0:
+                missing.append(low+i)
+        return missing
